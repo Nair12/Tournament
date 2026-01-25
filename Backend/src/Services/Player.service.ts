@@ -1,40 +1,45 @@
 import { IPlayerRepository } from "src/Repository/IPlayer.repository";
-import { IPlayerSerivce } from "./IPlayer.service";
+import { IPlayerService } from "./IPlayer.service";
 import { PlayerAddRequest } from "src/DTO/PlayerAddRequset";
 import { PlayerResponse } from "src/DTO/PlayerResponse";
-import { Inject, Injectable } from "@nestjs/common";
+import { ConflictException, Inject, Injectable } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
 
 
 @Injectable()
-export class PlayerService extends IPlayerSerivce{
-   
+export class PlayerService extends IPlayerService {
+
     constructor(
         @Inject(IPlayerRepository)
-        private playerRepository:IPlayerRepository
-    ){
+        private playerRepository: IPlayerRepository
+    ) {
         super()
     }
 
 
-    async getUser(id: string): Promise<PlayerResponse | null> {
-      
-      const player =  await this.playerRepository.getUser(id)
-      if(!player){
-        return null
-      }
-      
-      return plainToInstance(PlayerResponse,player,{excludeExtraneousValues:true})
+    async getPlayer(id: string): Promise<PlayerResponse | null> {
+
+        const player = await this.playerRepository.getPlayer(id)
+        if (!player) {
+            return null
+        }
+
+        return plainToInstance(PlayerResponse, player, { excludeExtraneousValues: true })
 
 
     }
-    async addUser(payload: PlayerAddRequest): Promise<void> {
-        try{
-            await this.playerRepository.addUser(payload)
+    async registerPlayer(payload: PlayerAddRequest): Promise<void> {
+
+        if (await this.playerRepository.playerExists(String(payload.email))) {
+            throw new ConflictException("Player exists")
         }
-        catch(error){
-            console.log(error)
+        if (await this.playerRepository.findByName(String(payload.name)) != null)
+        {
+           throw new ConflictException("Name is already taken")
         }
+
+        await this.playerRepository.addPlayer(payload)
+
 
     }
 }

@@ -29,9 +29,9 @@ export class MatchRepository extends IMatchRepository{
         
         await this.service.match.create({
             data:{
-                teamAId:String(payload.teamAID),
+                teamAId:String(payload.teamAId),
                 teamBId:String(payload.teamBId),
-                startTime:String(payload?.startTime),
+                startTime: payload.startTime? payload.startTime: new Date(),
                 matchType:payload.matchType
 
 

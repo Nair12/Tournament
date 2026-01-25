@@ -7,7 +7,7 @@ export class MatchRegisterRequest{
        
     matchType:MatchType
 
-    teamAID:String
+    teamAId:String
     teamBId: String
     
     tournamentId?:String

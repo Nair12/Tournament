@@ -7,4 +7,6 @@ export abstract class ITeamRepository {
   abstract createTeam(payload: TeamCreateRequest): Promise<Team>
 
   abstract deleteTeam(id: string): Promise<Team | null>
+
+  abstract getByQuery(query:string):Promise<Team[]>
 }

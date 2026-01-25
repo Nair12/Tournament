@@ -6,9 +6,14 @@ import { Player } from "@prisma/client";
 
 
 export abstract class IPlayerRepository{
-    abstract getUser(id:string):Promise<Player | null>
+    abstract getPlayer(id:string):Promise<Player | null>
 
-    abstract  addUser(payload:PlayerAddRequest):Promise<void>
+    abstract  addPlayer(payload:PlayerAddRequest):Promise<void>
+
+    abstract playerExists(email:string):Promise<boolean>
+
+    abstract findByName(name:string):Promise<Player | null>
+  
 
     
 

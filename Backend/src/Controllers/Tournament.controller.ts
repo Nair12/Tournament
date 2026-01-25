@@ -29,7 +29,6 @@ export class TournamentController{
         await this.service.registerTournament(payload)
         return {message:"Tournament added succsessfully"}
     }
-   
 
 
 

@@ -34,6 +34,10 @@ model Player{
 
    leadTeam Team? @relation("Captain")
 
+   createdTorunaments Tournament[]
+
+   createdMatches Match[]
+
   
 }
 model Team{
@@ -47,8 +51,10 @@ model Team{
     
     captain Player @relation("Captain",fields: [captainId],references: [id])
 
+    avatar String // FileName
 
-   players Player[]
+    
+    players Player[]
 
    matchesAsTeamA Match[] @relation("TeamA")
    matchesAsTeamB Match[] @relation("TeamB")
@@ -61,9 +67,16 @@ model Team{
 model Tournament {
   id String @id @default(uuid())
   title String
-  startTime DateTime
-  endTime DateTime
+
+  startDate DateTime
+
+  endDate DateTime
+  
   type TournamentType 
+
+  creatorId String
+
+  creator Player @relation(fields: [creatorId],references: [id])
 
   mathes Match[]
   
@@ -96,6 +109,8 @@ model Match {
 
   tournamentId String?
 
+  creatorId String
+
   teamAId String
   teamBId String
 
@@ -103,9 +118,16 @@ model Match {
 
   tournament Tournament? @relation(fields: [tournamentId],references: [id])
 
+  creator Player @relation(fields: [creatorId],references: [id])
+
   teamA Team @relation("TeamA",fields: [teamAId],references: [id])
 
   teamB Team @relation("TeamB",fields: [teamBId],references: [id])
+
+
+
+
+
 
   
   

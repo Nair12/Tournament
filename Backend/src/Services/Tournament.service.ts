@@ -38,6 +38,7 @@ export class TournamentSerivce extends ITournamentService {
         if(!teams) return []
 
         return plainToInstance(TeamResponse,teams,{excludeExtraneousValues:true})
+        
 
         
     }

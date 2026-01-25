@@ -3,10 +3,10 @@ import { PlayerResponse } from "src/DTO/PlayerResponse";
 
 
 
-export abstract class IPlayerSerivce{
+export abstract class IPlayerService{
 
-    abstract getUser(id:string):Promise<PlayerResponse | null>
-    abstract addUser(payload:PlayerAddRequest):Promise<void>
+    abstract getPlayer(id:string):Promise<PlayerResponse | null>
+    abstract registerPlayer(payload:PlayerAddRequest):Promise<void>
 
 
 }

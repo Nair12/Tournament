@@ -35,11 +35,7 @@ export class TeamService extends ITeamService {
     const team = await this.repository.createTeam(payload)
 
     return plainToInstance(
-      TeamResponse,
-      {
-        team
-      },
-      { excludeExtraneousValues: true },
+      TeamResponse,team,{ excludeExtraneousValues: true },
     )
   }
 
@@ -51,11 +47,17 @@ export class TeamService extends ITeamService {
     }
 
     return plainToInstance(
-      TeamResponse,
-      {
-       team
-      },
-      { excludeExtraneousValues: true },
+      TeamResponse,team,{ excludeExtraneousValues: true },
     )
   }
+
+  async getByQuery(query:string):Promise<TeamResponse[]>{
+    const teams = await this.repository.getByQuery(query)
+
+    if(!teams) return []
+
+    return plainToInstance(TeamResponse,teams,{excludeExtraneousValues:true})
+  }
+
+
 }

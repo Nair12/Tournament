@@ -10,7 +10,7 @@ export class TeamResponse
    id:String
 
    @Expose()
-   teamName:String
+   name:String
 
    @Expose()
    @Type(()=>PlayerResponse)

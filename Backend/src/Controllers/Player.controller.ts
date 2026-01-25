@@ -2,50 +2,38 @@ import { BadRequestException, Body, Controller, Get, HttpCode, Inject, NotFoundE
 import { ok } from "assert";
 import { PlayerAddRequest } from "src/DTO/PlayerAddRequset";
 import { PlayerResponse } from "src/DTO/PlayerResponse";
-import { IPlayerSerivce } from "src/Services/IPlayer.service";
+import { IPlayerService } from "src/Services/IPlayer.service";
 
 
 
 @Controller("Player")
-export class PlayerController
-{
+export class PlayerController {
   constructor(
-    @Inject(IPlayerSerivce)
-     private readonly playerService:IPlayerSerivce
-  ){}
+    @Inject(IPlayerService)
+    private readonly playerService: IPlayerService
+  ) { }
 
   @Get(':id')
- async getUser(@Param('id') id:string):Promise<PlayerResponse | null>
-  {
+  async getById(@Param('id') id: string): Promise<PlayerResponse | null> {
 
-      const player =   await this.playerService.getUser(id)
-      if(player == null){
-        throw new NotFoundException("Player not found")
-      }
-      return player 
-       
-    
-   
+    const player = await this.playerService.getPlayer(id)
+    if (player == null) {
+      throw new NotFoundException("Player not found")
+    }
+    return player
+
+
+
 
   }
 
   @Post()
-  async addUser(@Body()payload:PlayerAddRequest){
-    try{
-        await this.playerService.addUser(payload)
-        return {message:"User added succsessfully"}
-        
-    }
-    catch(error){
-        throw new BadRequestException("Failed to add user")
-    }
-      
+  async register(@Body() payload: PlayerAddRequest) {
+
+    await this.playerService.registerPlayer(payload)
+    return { message: "player has been registered succsessfully" }
 
   }
-   
-
-
-
 
 
 }

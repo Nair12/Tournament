@@ -11,7 +11,7 @@ export class TeamRepository extends ITeamRepository {
   }
 
   async getTeam(id: string): Promise<Team | null> {
-    return this.prisma.team.findUnique({
+    return await this.prisma.team.findUnique({
       where: { id },
       include: {
         players: true,
@@ -20,24 +20,42 @@ export class TeamRepository extends ITeamRepository {
   }
 
   async createTeam(payload: TeamCreateRequest): Promise<Team> {
-    return this.prisma.team.create({
-       data:{
-        name:String(payload.name),
-        captain:{
-            connect:{
-                id:String(payload.captainId)
-            }
+    return await this.prisma.team.create({
+      data: {
+        name: String(payload.name),
+        captain: {
+          connect: {
+            id: String(payload.captainId)
+          }
         }
-    
-       }
+
+      }
     })
-        
-    
+
+
   }
 
   async deleteTeam(id: string): Promise<Team | null> {
-    return this.prisma.team.delete({
-      where: { id },
+    return await this.prisma.team.delete({
+      where: { id: String(id) },
     })
   }
+
+
+  async getByQuery(query: string): Promise<Team[]> {
+    const teams = this.prisma.team.findMany({
+      where: {
+        name: {
+          contains: query,
+          mode:"insensitive"
+        }
+      }
+    })
+    if(!teams) return []
+
+    return teams
+
+  }
+
+
 }
