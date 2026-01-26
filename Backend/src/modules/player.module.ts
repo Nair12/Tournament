@@ -1,14 +1,15 @@
-import { Module } from "@nestjs/common";
+import { forwardRef, Module } from "@nestjs/common";
 import { PlayerController } from "src/Controllers/Player.controller";
 import { IPlayerRepository } from "src/Repository/IPlayer.repository";
 import { PlayerRepository } from "src/Repository/Player.repository";
 import { IPlayerService } from "src/Services/IPlayer.service";
 import { PlayerService } from "src/Services/Player.service";
 import { TokenModule } from "./token.module";
+import { AuthModule } from "./auth.module";
 
 
 @Module({
-    imports:[TokenModule],
+    imports:[TokenModule,forwardRef(()=>AuthModule)],
     controllers:[PlayerController],
     providers:[
         {

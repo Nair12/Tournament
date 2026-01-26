@@ -25,7 +25,7 @@ export class MatchSerivce extends IMatchSerivce{
 
       }
       async registerMatch(payload: MatchRegisterRequest): Promise<void> {
-         await this.repository.registerMatch(payload)
+         await this.repository.registerMatch(payload,"akoakakoaoka")
         
       }
       async deleteMatch(id: string): Promise<MatchResponse | null> {

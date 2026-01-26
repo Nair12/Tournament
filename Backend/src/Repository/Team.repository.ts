@@ -23,6 +23,7 @@ export class TeamRepository extends ITeamRepository {
     return await this.prisma.team.create({
       data: {
         name: String(payload.name),
+        avatar:"File.jpg",
         captain: {
           connect: {
             id: String(payload.captainId)

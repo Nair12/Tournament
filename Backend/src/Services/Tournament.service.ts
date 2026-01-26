@@ -29,7 +29,7 @@ export class TournamentSerivce extends ITournamentService {
 
     }
     async registerTournament(payload: TournamentRegisterRequest): Promise<void> {
-        await this.repository.addTournament(payload)
+        await this.repository.addTournament(payload,"akopoak-qsjqosj")
        
     }
     async getTeams(id: String): Promise<TeamResponse[]> {

@@ -71,8 +71,10 @@ model Tournament {
   startDate DateTime
 
   endDate DateTime
-  
+
   type TournamentType 
+
+  prizeFund String @default("0")
 
   creatorId String
 
@@ -117,6 +119,8 @@ model Match {
    
 
   tournament Tournament? @relation(fields: [tournamentId],references: [id])
+  
+
 
   creator Player @relation(fields: [creatorId],references: [id])
 
