@@ -1,5 +1,6 @@
-import { Body, Controller,Delete,Get, Inject, NotFoundException, Param,Post, Query } from "@nestjs/common";
+import { Body, Controller,Delete,Get, Inject, NotFoundException, Param,Post, Query, UseGuards } from "@nestjs/common";
 import { TeamCreateRequest } from "src/DTO/TeamCreateRequest";
+import { JwtAuthGuard } from "src/Guard/jwt.auth.guard";
 import { ITeamRepository } from "src/Repository/ITeam.repository";
 import { ITeamService } from "src/Services/ITeam.service";
 
@@ -21,7 +22,7 @@ export class TeamController{
 
     }
 
-
+    
     @Get(":id")
     async getTeam(@Param('id')id:string){
         const team = await this.service.deleteTeam(id)
@@ -31,7 +32,7 @@ export class TeamController{
         return team
     }
 
-
+    @UseGuards(JwtAuthGuard)
     @Post()
     async registerTeam(@Body() payload:TeamCreateRequest)
     {
@@ -39,6 +40,7 @@ export class TeamController{
         return team
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete(":id")
     async deleteTeam(@Param('id')id:string){
         const team = this.service.deleteTeam(id)

@@ -1,7 +1,8 @@
-import { Controller, Inject,Get, Param, Post,Body } from "@nestjs/common";
+import { Controller, Inject,Get, Param, Post,Body, UseGuards } from "@nestjs/common";
 import { privateDecrypt } from "crypto";
 import { TournamentRegisterRequest } from "src/DTO/TournamentRegisterRequest";
 import { TournamentResponse } from "src/DTO/TournamentResponse";
+import { JwtAuthGuard } from "src/Guard/jwt.auth.guard";
 import { ITournamentService } from "src/Services/ITournament.service";
 
 
@@ -23,7 +24,7 @@ export class TournamentController{
 
     }
 
-
+    @UseGuards(JwtAuthGuard)
     @Post()
     async addTournament(@Body() payload:TournamentRegisterRequest){
         await this.service.registerTournament(payload)
