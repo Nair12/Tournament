@@ -3,5 +3,5 @@
 
 export abstract class ITokenService{
 
-    abstract generateToken():string
+    abstract generateToken(player:any)
 }

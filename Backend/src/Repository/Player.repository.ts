@@ -10,7 +10,7 @@ import { TeamCreateRequest } from "src/DTO/TeamCreateRequest";
 
 @Injectable()
 export class PlayerRepository extends IPlayerRepository {
-
+    
     constructor(private prisma: PrismaService) {
         super()
     }
@@ -58,6 +58,13 @@ export class PlayerRepository extends IPlayerRepository {
         return player
 
     }
+    async findByEmail(email: string): Promise<Player | null> {
+        const player = await this.prisma.player.findUnique({where:{email:email}})
+        if(!player) return null
+        return player
+
+    }
+
 
 
 

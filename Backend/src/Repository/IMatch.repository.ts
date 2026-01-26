@@ -7,7 +7,7 @@ export abstract class IMatchRepository{
     
    abstract getMatch(id:String):Promise<Match | null>
 
-   abstract registerMatch(payload:MatchRegisterRequest):Promise<void>
+   abstract registerMatch(payload:MatchRegisterRequest,creatorId:string):Promise<void>
 
    abstract deleteMatch(id:String):Promise<Match | null>
 

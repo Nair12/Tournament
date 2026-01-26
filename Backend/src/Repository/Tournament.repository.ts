@@ -26,13 +26,16 @@ export class TournamentRepository extends ITournamentRepository{
 
     }
 
-    async addTournament(payload: TournamentRegisterRequest): Promise<void> {
+    async addTournament(payload: TournamentRegisterRequest,creatorId:string): Promise<void> {
          
         await this.prisma.tournament.create({data:{
             title:String(payload.title),
-            startTime:new Date(payload.startTime).toISOString(),
-            endTime:new Date(payload.endTime).toISOString(),
-            type:payload.type
+            startDate:new Date(payload.startTime),
+            endDate:new Date(payload.endTime),
+            type:payload.type,
+            creator:{
+                connect:{id:creatorId}
+            }
         }
         })
        
