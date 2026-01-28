@@ -1,9 +1,9 @@
 import { Inject, NotFoundException } from "@nestjs/common";
 import { ITournamentService } from "./ITournament.service";
 import { ITournamentRepository } from "src/Repository/ITournament.repository";
-import { TeamResponse } from "src/DTO/TeamReponse";
-import { TournamentRegisterRequest } from "src/DTO/TournamentRegisterRequest";
-import { TournamentResponse } from "src/DTO/TournamentResponse";
+import { TeamResponse } from "src/DTO/TeamReponse.dto";
+import { TournamentRegisterRequest } from "src/DTO/TournamentRegisterRequest.dto";
+import { TournamentResponse } from "src/DTO/TournamentResponse.dto";
 import { plainToInstance } from "class-transformer";
 
 

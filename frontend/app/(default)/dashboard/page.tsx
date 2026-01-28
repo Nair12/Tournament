@@ -1,9 +1,11 @@
 import React from 'react';
+import Premium from '../_components/Premium';
 
 const Page = () => {
     return (
-        <div className='flex items-center '>
-            <h1>Login</h1>
+        <div>
+            <Premium/>
+          
         </div>
     );
 }

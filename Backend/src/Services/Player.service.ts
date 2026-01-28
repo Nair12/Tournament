@@ -1,12 +1,12 @@
 import { IPlayerRepository } from "src/Repository/IPlayer.repository";
 import { IPlayerService } from "./IPlayer.service";
-import { PlayerAddRequest } from "src/DTO/PlayerAddRequset";
-import { PlayerResponse } from "src/DTO/PlayerResponse";
+import { PlayerAddRequest } from "src/DTO/PlayerAddRequset.dto";
+import { PlayerResponse } from "src/DTO/PlayerResponse.dto";
 import { ConflictException, forwardRef, Inject, Injectable } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
 import { Player } from "@prisma/client";
 import { AuthService } from "./Auth.service";
-import { LoginRequest } from "src/DTO/LoginRequest";
+import { LoginRequest } from "src/DTO/LoginRequest.dto";
 import * as bcrypt from 'bcrypt'
 
 @Injectable()

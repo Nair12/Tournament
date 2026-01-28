@@ -1,5 +1,5 @@
 import { Body, Controller,Delete,Get, Inject, NotFoundException, Param,Post, Query, UseGuards } from "@nestjs/common";
-import { TeamCreateRequest } from "src/DTO/TeamCreateRequest";
+import { TeamCreateRequest } from "src/DTO/TeamCreateRequest.dto";
 import { JwtAuthGuard } from "src/Guard/jwt.auth.guard";
 import { ITeamRepository } from "src/Repository/ITeam.repository";
 import { ITeamService } from "src/Services/ITeam.service";

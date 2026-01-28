@@ -1,6 +1,6 @@
 import { Inject } from "@nestjs/common";
-import { MatchRegisterRequest } from "src/DTO/MatchRegisterRequest";
-import { MatchResponse } from "src/DTO/MatchResponse";
+import { MatchRegisterRequest } from "src/DTO/MatchRegisterRequest.dto";
+import { MatchResponse } from "src/DTO/MatchResponse.dto";
 import { IMatchRepository } from "src/Repository/IMatch.repository";
 
 

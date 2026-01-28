@@ -1,8 +1,8 @@
 import { Inject } from "@nestjs/common";
 import { IMatchSerivce } from "./IMatch.service";
 import { IMatchRepository } from "src/Repository/IMatch.repository";
-import { MatchRegisterRequest } from "src/DTO/MatchRegisterRequest";
-import { MatchResponse } from "src/DTO/MatchResponse";
+import { MatchRegisterRequest } from "src/DTO/MatchRegisterRequest.dto";
+import { MatchResponse } from "src/DTO/MatchResponse.dto";
 import { plainToInstance } from "class-transformer";
 
 

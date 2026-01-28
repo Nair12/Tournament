@@ -1,10 +1,10 @@
-import { PlayerAddRequest } from "src/DTO/PlayerAddRequset";
-import { PlayerResponse } from "src/DTO/PlayerResponse";
+import { PlayerAddRequest } from "src/DTO/PlayerAddRequset.dto";
+import { PlayerResponse } from "src/DTO/PlayerResponse.dto";
 import { IPlayerRepository } from "./IPlayer.repository";
 import { PrismaService } from "prisma/PrismaClient";
 import { Player } from "@prisma/client";
 import { Injectable } from "@nestjs/common";
-import { TeamCreateRequest } from "src/DTO/TeamCreateRequest";
+import { TeamCreateRequest } from "src/DTO/TeamCreateRequest.dto";
 
 
 

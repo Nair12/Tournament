@@ -1,7 +1,7 @@
 import { Controller, Inject,Get, Param, Post,Body, UseGuards } from "@nestjs/common";
 import { privateDecrypt } from "crypto";
-import { TournamentRegisterRequest } from "src/DTO/TournamentRegisterRequest";
-import { TournamentResponse } from "src/DTO/TournamentResponse";
+import { TournamentRegisterRequest } from "src/DTO/TournamentRegisterRequest.dto";
+import { TournamentResponse } from "src/DTO/TournamentResponse.dto";
 import { JwtAuthGuard } from "src/Guard/jwt.auth.guard";
 import { ITournamentService } from "src/Services/ITournament.service";
 

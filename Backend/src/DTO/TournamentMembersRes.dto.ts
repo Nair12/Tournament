@@ -1,6 +1,6 @@
 import { Exclude,Type,Expose } from "class-transformer";
-import { TeamResponse } from "./TeamReponse";
-import { TournamentResponse } from "./TournamentResponse";
+import { TeamResponse } from "./TeamReponse.dto";
+import { TournamentResponse } from "./TournamentResponse.dto";
 
 
 @Exclude()

@@ -1,5 +1,5 @@
 import { Exclude, Expose, Type } from "class-transformer";
-import { PlayerResponse } from "./PlayerResponse";
+import { PlayerResponse } from "./PlayerResponse.dto";
 
 
 

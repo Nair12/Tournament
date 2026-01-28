@@ -12,9 +12,7 @@ export class PlayerAddRequest
     @MinLength(6)
     password:String
 
- 
-
-
+    
 
 
 }

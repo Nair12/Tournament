@@ -1,7 +1,7 @@
 import { Player } from "@prisma/client";
-import { LoginRequest } from "src/DTO/LoginRequest";
-import { PlayerAddRequest } from "src/DTO/PlayerAddRequset";
-import { PlayerResponse } from "src/DTO/PlayerResponse";
+import { LoginRequest } from "src/DTO/LoginRequest.dto";
+import { PlayerAddRequest } from "src/DTO/PlayerAddRequset.dto";
+import { PlayerResponse } from "src/DTO/PlayerResponse.dto";
 
 
 

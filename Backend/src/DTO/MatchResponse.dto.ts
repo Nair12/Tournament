@@ -1,7 +1,7 @@
 import { Exclude, Expose,Type } from "class-transformer";
-import { TeamResponse } from "./TeamReponse";
+import { TeamResponse } from "./TeamReponse.dto";
 import {MatchType} from "@prisma/client"
-import { TournamentResponse } from "./TournamentResponse";
+import { TournamentResponse } from "./TournamentResponse.dto";
 
 
 
