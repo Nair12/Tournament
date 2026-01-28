@@ -16,7 +16,7 @@ export const nav = [
     {
       title:"Dashboard",
       icon: BookmarkIcon,
-      url:"/Dashboard"
+      url:"/dashboard"
     },
     {
      title: "Find team",

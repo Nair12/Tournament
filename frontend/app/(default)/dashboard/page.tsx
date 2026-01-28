@@ -1,9 +1,11 @@
 import React from 'react';
+import Premium from '../_components/Premium';
 
 const Page = () => {
     return (
         <div>
-            <h1 className='text-red-600 text-4xl'>Welcome to dashboard</h1>
+            <Premium/>
+          
         </div>
     );
 }
