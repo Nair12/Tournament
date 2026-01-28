@@ -1,6 +1,6 @@
-import { TeamResponse } from "src/DTO/TeamReponse";
-import { TournamentRegisterRequest } from "src/DTO/TournamentRegisterRequest";
-import { TournamentResponse } from "src/DTO/TournamentResponse";
+import { TeamResponse } from "src/DTO/TeamReponse.dto";
+import { TournamentRegisterRequest } from "src/DTO/TournamentRegisterRequest.dto";
+import { TournamentResponse } from "src/DTO/TournamentResponse.dto";
 
 
 

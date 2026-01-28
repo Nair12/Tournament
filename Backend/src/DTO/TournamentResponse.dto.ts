@@ -1,7 +1,7 @@
 import { Exclude, Expose, Type } from "class-transformer";
 import { TournamentType } from "@prisma/client";
-import { MatchResponse } from "./MatchResponse";
-import { TournamentMembersRes } from "./TournamentMembersRes";
+import { MatchResponse } from "./MatchResponse.dto";
+import { TournamentMembersRes } from "./TournamentMembersRes.dto";
 
 @Exclude()
 export class TournamentResponse{

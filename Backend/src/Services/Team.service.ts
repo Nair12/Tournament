@@ -2,8 +2,8 @@
 import { Injectable, Inject } from '@nestjs/common'
 import { ITeamService } from './ITeam.service'
 import { ITeamRepository } from 'src/Repository/ITeam.repository'
-import { TeamCreateRequest } from 'src/DTO/TeamCreateRequest'
-import { TeamResponse } from '../DTO/TeamReponse'
+import { TeamCreateRequest } from 'src/DTO/TeamCreateRequest.dto'
+import { TeamResponse } from '../DTO/TeamReponse.dto'
 import { plainToInstance } from 'class-transformer'
 
 @Injectable()

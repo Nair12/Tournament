@@ -1,6 +1,6 @@
 import { Exclude,Expose, Type } from "class-transformer";
 import { IsString } from "class-validator";
-import { TeamResponse } from "./TeamReponse";
+import { TeamResponse } from "./TeamReponse.dto";
 
 
 

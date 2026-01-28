@@ -1,5 +1,5 @@
 import { Team } from '@prisma/client'
-import { TeamCreateRequest } from 'src/DTO/TeamCreateRequest'
+import { TeamCreateRequest } from 'src/DTO/TeamCreateRequest.dto'
 import { ITeamRepository } from './ITeam.repository'
 import { PrismaService } from 'prisma/PrismaClient'
 import { Injectable } from '@nestjs/common'

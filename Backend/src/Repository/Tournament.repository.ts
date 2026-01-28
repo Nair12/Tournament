@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { PrismaService } from "prisma/PrismaClient";
 import { ITournamentRepository } from "./ITournament.repository";
 import { Tournament, Team } from "@prisma/client";
-import { TournamentRegisterRequest } from "src/DTO/TournamentRegisterRequest";
+import { TournamentRegisterRequest } from "src/DTO/TournamentRegisterRequest.dto";
 
 
 

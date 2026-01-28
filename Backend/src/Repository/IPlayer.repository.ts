@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { PlayerAddRequest } from "../DTO/PlayerAddRequset";
-import { PlayerResponse } from "../DTO/PlayerResponse";
+import { PlayerAddRequest } from "../DTO/PlayerAddRequset.dto";
+import { PlayerResponse } from "../DTO/PlayerResponse.dto";
 import { Player } from "@prisma/client";
 
 

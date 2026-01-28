@@ -6,8 +6,8 @@ import {
 } from "@nestjs/common";
 import { privateDecrypt } from "crypto";
 import { applyMixins } from "rxjs/internal/util/applyMixins";
-import { MatchRegisterRequest } from "src/DTO/MatchRegisterRequest";
-import { MatchResponse } from "src/DTO/MatchResponse";
+import { MatchRegisterRequest } from "src/DTO/MatchRegisterRequest.dto";
+import { MatchResponse } from "src/DTO/MatchResponse.dto";
 import { JwtAuthGuard } from "src/Guard/jwt.auth.guard";
 import { IMatchSerivce } from "src/Services/IMatch.service";
 

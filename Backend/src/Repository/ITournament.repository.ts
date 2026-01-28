@@ -1,6 +1,6 @@
 import { Tournament,Team } from "@prisma/client";
-import { TournamentResponse } from "src/DTO/TournamentResponse";
-import { TournamentRegisterRequest } from "src/DTO/TournamentRegisterRequest";
+import { TournamentResponse } from "src/DTO/TournamentResponse.dto";
+import { TournamentRegisterRequest } from "src/DTO/TournamentRegisterRequest.dto";
 
 
 

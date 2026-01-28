@@ -1,6 +1,6 @@
 import { Match } from "@prisma/client";
 import { PrismaService } from "prisma/PrismaClient";
-import { MatchRegisterRequest } from "src/DTO/MatchRegisterRequest";
+import { MatchRegisterRequest } from "src/DTO/MatchRegisterRequest.dto";
 
 
 export abstract class IMatchRepository{

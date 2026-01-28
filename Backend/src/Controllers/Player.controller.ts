@@ -1,8 +1,8 @@
 import { BadRequestException, Body, Controller, Get, HttpCode, Inject, NotFoundException, Param, Post, UseGuards } from "@nestjs/common";
 import { ok } from "assert";
-import { LoginRequest } from "src/DTO/LoginRequest";
-import { PlayerAddRequest } from "src/DTO/PlayerAddRequset";
-import { PlayerResponse } from "src/DTO/PlayerResponse";
+import { LoginRequest } from "src/DTO/LoginRequest.dto";
+import { PlayerAddRequest } from "src/DTO/PlayerAddRequset.dto";
+import { PlayerResponse } from "src/DTO/PlayerResponse.dto";
 import { JwtAuthGuard } from "src/Guard/jwt.auth.guard";
 import { IPlayerService } from "src/Services/IPlayer.service";
 

@@ -1,7 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+
 
 const Hero = () => {
+
+   
+
     return (
         <div>
             <section className="relative w-screen max-w-full h-[90vh] flex z-10 items-center justify-center overflow-hidden">
@@ -19,10 +24,11 @@ const Hero = () => {
 
                     <div className='flex flex-wrap gap-6 justify-center m-4'>
                       
-                        <button className="group relative px-8 py-4 bg-black text-white text-sm font-bold uppercase tracking-widest rounded-full overflow-hidden border border-white/10 transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(0,0,0,0.8)]">
-                            <span className="relative z-10">Get Started</span>
-                    
-                        </button>
+                       
+
+                        <Link href="/login" className="group relative px-8 py-4 bg-black text-white text-sm font-bold uppercase tracking-widest rounded-full overflow-hidden border border-white/10 transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(0,0,0,0.8)]">
+                         <span className="relative z-10">Get Started</span>
+                        </Link>
 
                        
                         <button className="px-8 py-4 bg-zinc-900 text-gray-300 text-sm font-bold uppercase tracking-widest rounded-full border border-zinc-800 hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-lg">

@@ -1,5 +1,5 @@
 import { Team } from '@prisma/client'
-import { TeamCreateRequest } from 'src/DTO/TeamCreateRequest'
+import { TeamCreateRequest } from 'src/DTO/TeamCreateRequest.dto'
 
 export abstract class ITeamRepository {
   abstract getTeam(id: string): Promise<Team | null>

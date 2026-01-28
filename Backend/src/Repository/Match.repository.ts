@@ -1,5 +1,5 @@
 import { Match } from "@prisma/client";
-import { MatchRegisterRequest } from "src/DTO/MatchRegisterRequest";
+import { MatchRegisterRequest } from "src/DTO/MatchRegisterRequest.dto";
 import { IMatchRepository } from "./IMatch.repository";
 import { Inject } from "@nestjs/common";
 import { PrismaService } from "prisma/PrismaClient";
