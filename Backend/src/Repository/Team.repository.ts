@@ -1,4 +1,4 @@
-import { Team } from '@prisma/client'
+import { Prisma, Team } from '@prisma/client'
 import { TeamCreateRequest } from 'src/DTO/TeamCreateRequest.dto'
 import { ITeamRepository } from './ITeam.repository'
 import { PrismaService } from 'prisma/PrismaClient'
@@ -19,14 +19,17 @@ export class TeamRepository extends ITeamRepository {
     })
   }
 
-  async createTeam(payload: TeamCreateRequest): Promise<Team> {
-    return await this.prisma.team.create({
+  async createTeam(payload: TeamCreateRequest,userId:string, avatar: string,tx?:Prisma.TransactionClient): Promise<Team> {
+    
+    const dbClient = tx ? tx : this.prisma
+   
+    return await dbClient.team.create({
       data: {
         name: String(payload.name),
-        avatar:"File.jpg",
+        avatar:avatar,
         captain: {
           connect: {
-            id: String(payload.captainId)
+            id: String(userId)
           }
         }
 

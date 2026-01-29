@@ -1,4 +1,4 @@
-import { Player } from "@prisma/client";
+import { Player, Prisma } from "@prisma/client";
 import { LoginRequest } from "src/DTO/LoginRequest.dto";
 import { PlayerAddRequest } from "src/DTO/PlayerAddRequset.dto";
 import { PlayerResponse } from "src/DTO/PlayerResponse.dto";
@@ -13,5 +13,8 @@ export abstract class IPlayerService{
     abstract findByEmail(email:string):Promise<Player | null>
 
     abstract login(payload:LoginRequest):Promise<any>
+
+    abstract updateTeam(teamId: string, playerId: string,tx?:Prisma.TransactionClient):Promise<PlayerResponse>
+    
 
 }

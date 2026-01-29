@@ -48,6 +48,8 @@ model Team{
    updatedAt DateTime @updatedAt
 
     captainId String @unique
+
+    description String?
     
     captain Player @relation("Captain",fields: [captainId],references: [id])
 

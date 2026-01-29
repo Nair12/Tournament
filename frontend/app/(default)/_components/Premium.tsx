@@ -34,7 +34,7 @@ const Premium = () => {
                         <ChevronRightIcon className="size-4 group-hover/btn:translate-x-1 transition-transform" />
                     </button>
 
-                    <h1 className='hover:text-red-700 '>His up</h1>
+                  
 
                    
                 </div>

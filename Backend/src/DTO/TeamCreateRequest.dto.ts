@@ -1,11 +1,15 @@
+import { IsOptional, IsString } from "class-validator"
+import { HasMimeType, IsFile, MemoryStoredFile } from "nestjs-form-data"
 
 
 
 export class TeamCreateRequest{
     
-    name:String
+    name:string
 
-    captainId:String
+    @IsOptional()
+    @IsString()
+    description?:string
 
 
 }

@@ -6,6 +6,8 @@ import { IPlayerService } from "src/Services/IPlayer.service";
 import { PlayerService } from "src/Services/Player.service";
 import { TokenModule } from "./token.module";
 import { AuthModule } from "./auth.module";
+import { IPlayerFassade } from "src/Fassade/IPlayerFassade";
+import { PlayerFassade } from "src/Fassade/PlayerFassade";
 
 
 @Module({
@@ -19,9 +21,13 @@ import { AuthModule } from "./auth.module";
         {
             provide:IPlayerService,
             useClass:PlayerService
+        },
+        {
+            provide:IPlayerFassade,
+            useClass:PlayerFassade
         }
     ],
-    exports:[IPlayerService]
+    exports:[IPlayerService,IPlayerFassade]
 
 
     

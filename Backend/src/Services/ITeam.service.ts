@@ -4,8 +4,9 @@ import { TeamResponse } from '../DTO/TeamReponse.dto'
 export abstract class ITeamService {
   abstract getTeam(id: string): Promise<TeamResponse | null>
 
-  abstract createTeam(payload: TeamCreateRequest): Promise<TeamResponse>
+  abstract createTeam(payload: TeamCreateRequest, userId: string,avatar:string): Promise<TeamResponse>
 
   abstract deleteTeam(id: string): Promise<TeamResponse | null>
-   abstract getByQuery(query:string):Promise<TeamResponse[]>
+
+  abstract getByQuery(query: string): Promise<TeamResponse[]>
 }
