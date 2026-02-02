@@ -5,8 +5,6 @@
  * Team forge API desc
  * OpenAPI spec version: 1.0
  */
-export type PlayerAddRequestName = { [key: string]: unknown };
-
 export type PlayerAddRequestEmail = { [key: string]: unknown };
 
 /**
@@ -15,7 +13,6 @@ export type PlayerAddRequestEmail = { [key: string]: unknown };
 export type PlayerAddRequestPassword = { [key: string]: unknown };
 
 export interface PlayerAddRequest {
-  name: PlayerAddRequestName;
   email: PlayerAddRequestEmail;
   /** @minLength 6 */
   password: PlayerAddRequestPassword;
@@ -60,13 +57,9 @@ export interface PlayerResponse {
   team: TeamResponse;
 }
 
-export type TeamCreateRequestName = { [key: string]: unknown };
-
-export type TeamCreateRequestCaptainId = { [key: string]: unknown };
-
 export interface TeamCreateRequest {
-  name: TeamCreateRequestName;
-  captainId: TeamCreateRequestCaptainId;
+  name: string;
+  description?: string;
 }
 
 export type TournamentRegisterRequestTitle = { [key: string]: unknown };
@@ -164,8 +157,6 @@ export interface TournamentResponse {
 }
 
 export type PlayerControllerGetById200 = { [key: string]: unknown };
-
-export type PlayerControllerLogin201 = { [key: string]: unknown };
 
 export type TeamControllerGetTeamByNameParams = {
 q: string;

@@ -19,7 +19,7 @@ const DefaultLayout = ({ children }: { children: React.ReactNode }) => {
                     </div>
                 </header>
                 
-                <main className="flex-1 overflow-y-auto p-8 custom-scrollbar bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-zinc-900/20 via-black to-black">
+                <main className="overflow-y-auto p-8 custom-scrollbar from-zinc-900/20 via-black to-black">
                     {children}
                 </main>
             </div>

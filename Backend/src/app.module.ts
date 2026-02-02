@@ -6,9 +6,10 @@ import { PlayerModule } from './modules/player.module';
 import { TeamModule } from './modules/team.module';
 import { ToruanamentModule } from './modules/tournament.module';
 import { MatchModule } from './modules/match.module';
+import { FaceitModule } from './modules/faceit.module';
 
 @Module({
-  imports: [PrismaModule,PlayerModule,TeamModule,ToruanamentModule,MatchModule],
+  imports: [PrismaModule,PlayerModule,TeamModule,ToruanamentModule,MatchModule,FaceitModule],
   controllers: [AppController],
   providers: [AppService]
 })

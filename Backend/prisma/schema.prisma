@@ -19,8 +19,8 @@ datasource db {
 model Player{
    id    String @id @default(uuid())
    email String @unique
-   name  String @unique
   
+   isActive Boolean @default(false)
 
    password String 
 
@@ -36,10 +36,92 @@ model Player{
 
    createdTorunaments Tournament[]
 
+  faceitProfile FaceitProfile?
+
    createdMatches Match[]
 
   
 }
+
+model FaceitProfile{
+    id String @id @default(uuid())
+    playerId String @unique
+
+    player Player @relation(fields: [playerId],references: [id])
+    faceitId String @unique
+    nickname String
+    avatar String?
+    
+ 
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    stats FaceitStats?
+
+}
+
+model FaceitStats{
+    id String @id @default(uuid())
+    faceitProfileId String @unique
+    faceitProfile FaceitProfile @relation(fields: [faceitProfileId],references: [id])
+    mathes Int
+    country String
+    kdRatio Float
+    winRate Float
+    avg Float
+    
+    adr Float
+    skillLevel Int
+    elo Int
+    
+  
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    segments SegmentStats[]
+    weapons WeaponStats[]
+
+}
+
+
+model SegmentStats{
+    id String @id @default(uuid())
+    faceitStatsId String
+
+    faceitStats FaceitStats @relation(fields: [faceitStatsId],references: [id])
+
+    map String
+
+    matches Int
+    winRate Float
+    kdRatio Float
+    adr Float
+    headshotPercentage Float
+
+
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+
+model WeaponStats{
+    id String @id @default(uuid())
+    faceitStatsId String
+
+    faceitStats FaceitStats @relation(fields: [faceitStatsId],references: [id])
+
+    weapon String
+
+    kills Int
+    accuracy Float
+    headshotPercentage Float
+    
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
 model Team{
    id String @id @default(uuid())
    name String @unique
@@ -48,6 +130,8 @@ model Team{
    updatedAt DateTime @updatedAt
 
     captainId String @unique
+
+    description String?
     
     captain Player @relation("Captain",fields: [captainId],references: [id])
 

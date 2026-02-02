@@ -1,11 +1,16 @@
-import { BadRequestException, Body, Controller, Get, HttpCode, Inject, NotFoundException, Param, Post, UseGuards } from "@nestjs/common";
+import { BadRequestException, Body, Controller, Get, HttpCode, Inject, NotFoundException, Param, Res,Post, UseGuards, UseInterceptors, Req } from "@nestjs/common";
+import * as express from 'express';
 import { ok } from "assert";
 import { LoginRequest } from "src/DTO/LoginRequest.dto";
 import { PlayerAddRequest } from "src/DTO/PlayerAddRequset.dto";
 import { PlayerResponse } from "src/DTO/PlayerResponse.dto";
 import { JwtAuthGuard } from "src/Guard/jwt.auth.guard";
 import { IPlayerService } from "src/Services/IPlayer.service";
-
+import { FileInterceptor } from "@nestjs/platform-express";
+import { randomUUID } from "crypto";
+import { diskStorage } from "multer";
+import { extname } from "path";
+import { AuthGuard } from "@nestjs/passport";
 
 
 @Controller("Player")
@@ -14,6 +19,34 @@ export class PlayerController {
     @Inject(IPlayerService)
     private readonly playerService: IPlayerService
   ) { }
+
+
+
+  @Get('faceit')
+  @UseGuards(AuthGuard('faceit'))
+  async faceitLogin(){
+    //initiates the Faceit OAuth2 login flow
+  }
+
+  @Get('faceit/callback')
+  @UseGuards(AuthGuard('faceit'))
+  async faceitCallback(@Res({passthrough:true}) res:express.Response,@Req() req){
+    const user = req.user
+
+    
+    
+    res.cookie("access_token",user.access_token,{
+      httpOnly:true,
+      maxAge:3600000,
+      sameSite:'lax',
+      secure:false,
+    })
+    return { message: "Login successful via Faceit"
+    }
+
+  }
+
+
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
@@ -26,18 +59,39 @@ export class PlayerController {
     return player
   }
 
-  @Post()
-  async register(@Body() payload: PlayerAddRequest) {
 
+  @Post()
+  @UseInterceptors(FileInterceptor("avatar",{
+          storage:diskStorage({
+              destination:'./uploads/players',
+              filename:(req,file,cb)=>{
+                  const uuid = randomUUID()
+                  const ext = extname(file.originalname)
+                  const filename = `${uuid}${ext}`
+                  cb(null,filename)
+              }
+          })
+          
+  
+      }))
+  async register(@Body() payload: PlayerAddRequest) {
+   
     await this.playerService.registerPlayer(payload)
     return { message: "player has been registered succsessfully" }
 
   }
 
   @Post("login")
-  async login(@Body() payload:LoginRequest){
-    const res = this.playerService.login(payload)
-    return res 
+  async login(@Body() payload:LoginRequest,@Res({passthrough:true}) res:express.Response){
+    const loginResponse = await this.playerService.login(payload)
+    
+    res.cookie("access_token",loginResponse.access_token,{
+      httpOnly:true,
+      maxAge:3600000,
+      sameSite:'lax',
+      secure:false,
+    })
+    return { message: "Login successful" }
   }
 
 

@@ -2,7 +2,7 @@ import { PlayerAddRequest } from "src/DTO/PlayerAddRequset.dto";
 import { PlayerResponse } from "src/DTO/PlayerResponse.dto";
 import { IPlayerRepository } from "./IPlayer.repository";
 import { PrismaService } from "prisma/PrismaClient";
-import { Player } from "@prisma/client";
+import { Player, Prisma } from "@prisma/client";
 import { Injectable } from "@nestjs/common";
 import { TeamCreateRequest } from "src/DTO/TeamCreateRequest.dto";
 
@@ -10,7 +10,7 @@ import { TeamCreateRequest } from "src/DTO/TeamCreateRequest.dto";
 
 @Injectable()
 export class PlayerRepository extends IPlayerRepository {
-    
+   
     constructor(private prisma: PrismaService) {
         super()
     }
@@ -30,13 +30,12 @@ export class PlayerRepository extends IPlayerRepository {
 
         const res = await this.prisma.player.create({
             data: {
-                name: String(payload.name),
                 password: String(payload.password),
                 email: String(payload.email)
             }
         })
 
-        console.log("Result:" + res)
+        
 
 
 
@@ -50,14 +49,23 @@ export class PlayerRepository extends IPlayerRepository {
         return false
     }
 
-    async findByName(name: string): Promise<Player | null> {
-        const player = await this.prisma.player.findUnique({ where: { name: name } })
-        if(!player){
-            return null
-        }
+    async updateTeamId(teamId: string, playerId: string, tx?: Prisma.TransactionClient): Promise<Player> {
+        const dbClient = tx ? tx : this.prisma
+        const player = await dbClient.player.update({
+            where: { id: String(playerId) },
+            data: { teamId: String(teamId) }
+        })
         return player
-
     }
+
+    // async findByName(name: string): Promise<Player | null> {
+    //     const player = await this.prisma.player.findUnique({ where: { name: name } })
+    //     if(!player){
+    //         return null
+    //     }
+    //     return player
+
+    // }
     async findByEmail(email: string): Promise<Player | null> {
         const player = await this.prisma.player.findUnique({where:{email:email}})
         if(!player) return null
