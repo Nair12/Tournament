@@ -5,7 +5,7 @@ import { IFaceitRepository } from "src/Repository/IFaceit.repository";
 import { IPlayerService } from "./IPlayer.service";
 import { randomUUID } from "node:crypto";
 import { FaceitUser } from "faceit-visa";
-import { FaceitUserDto } from "src/DTO/FaceitUser.dto";
+import { FaceitUserRequstDto } from "src/DTO/FaceitUserRequest.dto";
 
 
 @Injectable()
@@ -19,7 +19,7 @@ export class FaceitService extends IFaceitService {
         super()
     }
 
-    async getOrCreate(payload:FaceitUserDto): Promise<FaceitProfile> {
+    async getOrCreate(payload:FaceitUserRequstDto): Promise<FaceitProfile> {
           const player = await this.playerService.findByEmail(payload.email ||'')
           
           if(!player){

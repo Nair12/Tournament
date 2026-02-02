@@ -1,5 +1,5 @@
 import { LoginRequest } from "@/models/generated.schemas"
-import {api} from "./axios"
+import {clientAxios} from "../axios"
 import { ca } from "zod/v4/locales"
 
 
@@ -8,7 +8,7 @@ export const UserApi = {
     login: async (payload:LoginRequest)=>{
         try{
               
-          const res = await  api.post('/Player/login',payload)
+          const res = await  clientAxios.post('/Player/login',payload)
           return res.data
         }
         catch(ex){
@@ -18,7 +18,7 @@ export const UserApi = {
     },
     regiser: async (payload:FormData)=>{
         try{
-           const res = await api.post('/Player',payload,{
+           const res = await clientAxios.post('/Player',payload,{
             headers:{}
            })
             return res.data

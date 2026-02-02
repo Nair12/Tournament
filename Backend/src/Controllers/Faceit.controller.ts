@@ -28,7 +28,7 @@ export class FaceitController {
 
 
     @Get("callback")
-    async loginCallback(@Res({ passthrough: true }) res: express.Response, @Req() req, @Query('code') code: string,
+    async loginCallback(@Res() res: express.Response, @Req() req, @Query('code') code: string,
         @Session() session) {
 
 
@@ -46,6 +46,7 @@ export class FaceitController {
             maxAge: 3600000,
             sameSite: 'lax',
             secure: false,
+            path: '/',
         })
 
 
@@ -55,6 +56,6 @@ export class FaceitController {
 
     }
 
-  
+
 
 }

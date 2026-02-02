@@ -23,6 +23,11 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface FaceitUserResponse {
+  nickname: string;
+  avatar?: string;
+}
+
 export type TeamResponseId = { [key: string]: unknown };
 
 export type TeamResponseName = { [key: string]: unknown };
@@ -35,10 +40,6 @@ export interface TeamResponse {
 
 export type PlayerResponseId = { [key: string]: unknown };
 
-export type PlayerResponseName = { [key: string]: unknown };
-
-export type PlayerResponseLogin = { [key: string]: unknown };
-
 export type PlayerResponseEmail = { [key: string]: unknown };
 
 export type PlayerResponsePassword = { [key: string]: unknown };
@@ -47,13 +48,12 @@ export type PlayerResponseTeamId = { [key: string]: unknown };
 
 export interface PlayerResponse {
   id: PlayerResponseId;
-  name: PlayerResponseName;
-  login: PlayerResponseLogin;
   email: PlayerResponseEmail;
   password: PlayerResponsePassword;
   createdAt: string;
   updatedAt: string;
   teamId: PlayerResponseTeamId;
+  faceitProfile?: FaceitUserResponse;
   team: TeamResponse;
 }
 
@@ -156,7 +156,13 @@ export interface TournamentResponse {
   teams: TournamentMembersRes[];
 }
 
+export type PlayerControllerGetUserData200 = { [key: string]: unknown };
+
 export type PlayerControllerGetById200 = { [key: string]: unknown };
+
+export type FaceitControllerLoginCallbackParams = {
+code: string;
+};
 
 export type TeamControllerGetTeamByNameParams = {
 q: string;

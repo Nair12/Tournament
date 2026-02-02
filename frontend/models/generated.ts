@@ -12,12 +12,14 @@ import type {
 } from 'axios';
 
 import type {
+  FaceitControllerLoginCallbackParams,
   LoginRequest,
   MatchControllerGetMatch200,
   MatchRegisterRequest,
   MatchResponse,
   PlayerAddRequest,
   PlayerControllerGetById200,
+  PlayerControllerGetUserData200,
   TeamControllerDeleteTeam200,
   TeamControllerGetTeamByNameParams,
   TeamCreateRequest,
@@ -50,6 +52,22 @@ const appControllerGetBye = <TData = AxiosResponse<string>>(
     );
   }
 
+const playerControllerFaceitLogin = <TData = AxiosResponse<void>>(
+     options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/Player/faceit`,options
+    );
+  }
+
+const playerControllerGetUserData = <TData = AxiosResponse<PlayerControllerGetUserData200>>(
+     options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/Player/me`,options
+    );
+  }
+
 const playerControllerGetById = <TData = AxiosResponse<PlayerControllerGetById200>>(
     id: string, options?: AxiosRequestConfig
  ): Promise<TData> => {
@@ -73,6 +91,24 @@ const playerControllerLogin = <TData = AxiosResponse<void>>(
     return axios.post(
       `/Player/login`,
       loginRequest,options
+    );
+  }
+
+const faceitControllerFaceitLogin = <TData = AxiosResponse<void>>(
+     options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/faceit`,options
+    );
+  }
+
+const faceitControllerLoginCallback = <TData = AxiosResponse<void>>(
+    params: FaceitControllerLoginCallbackParams, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/faceit/callback`,{
+    ...options,
+        params: {...params, ...options?.params},}
     );
   }
 
@@ -153,12 +189,16 @@ const matchControllerRegisterMatch = <TData = AxiosResponse<void>>(
     );
   }
 
-return {appControllerGetHello,appControllerGetBye,playerControllerGetById,playerControllerRegister,playerControllerLogin,teamControllerGetTeamByName,teamControllerRegisterTeam,teamControllerGetTeam,teamControllerDeleteTeam,tournamentControllerGetTournament,tournamentControllerAddTournament,matchControllerGetMatch,matchControllerDeleteMatch,matchControllerRegisterMatch}};
+return {appControllerGetHello,appControllerGetBye,playerControllerFaceitLogin,playerControllerGetUserData,playerControllerGetById,playerControllerRegister,playerControllerLogin,faceitControllerFaceitLogin,faceitControllerLoginCallback,teamControllerGetTeamByName,teamControllerRegisterTeam,teamControllerGetTeam,teamControllerDeleteTeam,tournamentControllerGetTournament,tournamentControllerAddTournament,matchControllerGetMatch,matchControllerDeleteMatch,matchControllerRegisterMatch}};
 export type AppControllerGetHelloResult = AxiosResponse<string>
 export type AppControllerGetByeResult = AxiosResponse<string>
+export type PlayerControllerFaceitLoginResult = AxiosResponse<void>
+export type PlayerControllerGetUserDataResult = AxiosResponse<PlayerControllerGetUserData200>
 export type PlayerControllerGetByIdResult = AxiosResponse<PlayerControllerGetById200>
 export type PlayerControllerRegisterResult = AxiosResponse<void>
 export type PlayerControllerLoginResult = AxiosResponse<void>
+export type FaceitControllerFaceitLoginResult = AxiosResponse<void>
+export type FaceitControllerLoginCallbackResult = AxiosResponse<void>
 export type TeamControllerGetTeamByNameResult = AxiosResponse<TeamResponse[]>
 export type TeamControllerRegisterTeamResult = AxiosResponse<TeamResponse>
 export type TeamControllerGetTeamResult = AxiosResponse<TeamResponse>

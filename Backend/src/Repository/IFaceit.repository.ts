@@ -1,12 +1,12 @@
 import { FaceitProfile, FaceitStats } from "@prisma/client";
 import { FaceitUser } from "faceit-visa";
-import { FaceitUserDto } from "src/DTO/FaceitUser.dto";
+import { FaceitUserRequstDto } from "src/DTO/FaceitUserRequest.dto";
 
 
 
 export abstract class IFaceitRepository{
    
-    abstract getOrCreate(payload:FaceitUserDto): Promise<FaceitProfile>;
+    abstract getOrCreate(payload:FaceitUserRequstDto): Promise<FaceitProfile>;
 
     abstract findByFaceitId(faceitId: string): Promise<FaceitProfile | null>;
 

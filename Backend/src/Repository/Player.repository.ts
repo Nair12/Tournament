@@ -17,7 +17,8 @@ export class PlayerRepository extends IPlayerRepository {
 
     async getPlayer(id: string): Promise<Player | null> {
 
-        const player = await this.prisma.player.findUnique({ where: { id: id }, include: { team: true } })
+        const player = await this.prisma.player.findUnique({ where: { id: id }, include: { team: true,faceitProfile:true } })
+        console.log("Player:"+ player?.faceitProfile?.nickname)
 
         if (!player) {
             return null

@@ -6,7 +6,7 @@ import { IPlayerService } from "src/Services/IPlayer.service";
 import { randomUUID } from "node:crypto";
 import { PrismaService } from "prisma/PrismaClient";
 import { FaceitUser } from "faceit-visa";
-import { FaceitUserDto } from "src/DTO/FaceitUser.dto";
+import { FaceitUserRequstDto } from "src/DTO/FaceitUserRequest.dto";
 
 
 @Injectable()
@@ -19,7 +19,7 @@ export class FaceitRepository extends IFaceitRepository{
         super()
     }
 
-    async getOrCreate(payload:FaceitUserDto): Promise<FaceitProfile> {
+    async getOrCreate(payload:FaceitUserRequstDto): Promise<FaceitProfile> {
         
         return await this.prisma.faceitProfile.upsert({
         where: { faceitId: payload.guid}, 

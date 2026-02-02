@@ -13,6 +13,8 @@ export abstract class IPlayerService{
     abstract findByEmail(email:string):Promise<Player | null>
 
     abstract login(payload:LoginRequest):Promise<any>
+    
+    // abstract getUserData(id:string):Promise<PlayerResponse>
 
     abstract updateTeam(teamId: string, playerId: string,tx?:Prisma.TransactionClient):Promise<PlayerResponse>
     

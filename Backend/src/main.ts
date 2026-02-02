@@ -18,14 +18,14 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app,config)
   SwaggerModule.setup('swagger',app,document)
-
+ app.use(cookieParser())
   app.enableCors({
     origin:'http://localhost:3000',
     credentials:true,
   }
   )
 
-  app.use(cookieParser())
+
   app.use(
     session({
       secret: process.env.SESSION_SECRET,

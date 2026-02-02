@@ -11,8 +11,6 @@ import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class PlayerService extends IPlayerService {
-
-
     constructor(
         @Inject(IPlayerRepository)
         private playerRepository: IPlayerRepository,
@@ -37,7 +35,7 @@ export class PlayerService extends IPlayerService {
             return null
         }
 
-        return plainToInstance(PlayerResponse, player, { excludeExtraneousValues: true })
+        return plainToInstance(PlayerResponse, player,{excludeExtraneousValues:true})
 
 
     }
@@ -46,14 +44,17 @@ export class PlayerService extends IPlayerService {
         if (await this.playerRepository.playerExists(String(payload.email))) {
             throw new ConflictException("Player exists")
         }
-    
+
         const hashedPassword = await bcrypt.hash(payload.password.toString(), 10)
         payload.password = hashedPassword
 
         await this.playerRepository.addPlayer(payload)
 
-
     }
+
+    // getUserData(id:string): Promise<PlayerResponse> {
+    // }
+
 
 
 
