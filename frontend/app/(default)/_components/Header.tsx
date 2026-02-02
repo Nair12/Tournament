@@ -1,6 +1,7 @@
 'use client'
 import { useUserStore } from '@/app/_providers/UserProvider';
 import React from 'react';
+import DropDown from './DropDown';
 
 const Header = () => {
     
@@ -14,7 +15,7 @@ const Header = () => {
                 <span className="text-white italic font-bold">Dashboard</span>
             </div>
             <div className='ml-auto'>
-                <img className='rounded-full w-13 h-auto' src={user?.avatar}></img>
+               <DropDown/>
 
             </div>
         </header>
