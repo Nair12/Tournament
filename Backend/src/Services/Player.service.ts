@@ -46,10 +46,7 @@ export class PlayerService extends IPlayerService {
         if (await this.playerRepository.playerExists(String(payload.email))) {
             throw new ConflictException("Player exists")
         }
-        if (await this.playerRepository.findByName(String(payload.name)) != null) {
-            throw new ConflictException("Name is already taken")
-        }
-
+    
         const hashedPassword = await bcrypt.hash(payload.password.toString(), 10)
         payload.password = hashedPassword
 

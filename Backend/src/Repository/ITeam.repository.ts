@@ -9,4 +9,7 @@ export abstract class ITeamRepository {
   abstract deleteTeam(id: string): Promise<Team | null>
 
   abstract getByQuery(query:string):Promise<Team[]>
+
+  abstract transaction<T>(fn: (tx: Prisma.TransactionClient) => Promise<T>) 
+
 }

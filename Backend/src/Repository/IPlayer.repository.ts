@@ -12,7 +12,7 @@ export abstract class IPlayerRepository{
 
     abstract playerExists(email:string):Promise<boolean>
 
-    abstract findByName(name:string):Promise<Player | null>
+    // abstract findByName(name:string):Promise<Player | null>
 
     abstract findByEmail(email:string):Promise<Player | null>
   

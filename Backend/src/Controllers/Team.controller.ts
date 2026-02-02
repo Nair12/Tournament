@@ -1,4 +1,4 @@
-import { Body, Controller,Delete,Get, Inject, NotFoundException, Param,Post, Query, Req, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from "@nestjs/common";
+import { Body, Controller,Delete,Get, Inject, NotFoundException, Param,Post, Query, Req, UploadedFile, UseGuards, UseInterceptors } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { randomUUID } from "crypto";
 import { diskStorage } from "multer";
@@ -39,7 +39,7 @@ export class TeamController{
 
     @UseGuards(JwtAuthGuard)
     @Post()
-    @UseInterceptors(FileInterceptor('avatar',{
+    @UseInterceptors(FileInterceptor("avatar",{
         storage:diskStorage({
             destination:'./uploads/teams',
             filename:(req,file,cb)=>{
@@ -52,9 +52,11 @@ export class TeamController{
         
 
     }))
-    async registerTeam(@Body() payload:TeamCreateRequest, @Req() req, @UploadedFiles() file:Express.Multer.File)
+    async registerTeam(@Body() payload:TeamCreateRequest, @Req() req, @UploadedFile() file:Express.Multer.File)
     {
+      
         const userId = req.user['userId']
+        console.log(userId)
         const team = await this.service.createTeam(payload, userId, file.filename)
         return team
     }

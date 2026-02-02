@@ -19,14 +19,14 @@ export class TeamRepository extends ITeamRepository {
     })
   }
 
-  async createTeam(payload: TeamCreateRequest,userId:string, avatar: string,tx?:Prisma.TransactionClient): Promise<Team> {
-    
+  async createTeam(payload: TeamCreateRequest, userId: string, avatar: string, tx?: Prisma.TransactionClient): Promise<Team> {
+
     const dbClient = tx ? tx : this.prisma
-   
+
     return await dbClient.team.create({
       data: {
         name: String(payload.name),
-        avatar:avatar,
+        avatar: avatar,
         captain: {
           connect: {
             id: String(userId)
@@ -51,14 +51,17 @@ export class TeamRepository extends ITeamRepository {
       where: {
         name: {
           contains: query,
-          mode:"insensitive"
+          mode: "insensitive"
         }
       }
     })
-    if(!teams) return []
+    if (!teams) return []
 
     return teams
 
+  }
+  async transaction<T>(fn: (tx: Prisma.TransactionClient) => Promise<T>) {
+    return await this.prisma.$transaction(fn);
   }
 
 

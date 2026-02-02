@@ -30,13 +30,12 @@ export class PlayerRepository extends IPlayerRepository {
 
         const res = await this.prisma.player.create({
             data: {
-                name: String(payload.name),
                 password: String(payload.password),
                 email: String(payload.email)
             }
         })
 
-        console.log("Result:" + res)
+        
 
 
 
@@ -59,14 +58,14 @@ export class PlayerRepository extends IPlayerRepository {
         return player
     }
 
-    async findByName(name: string): Promise<Player | null> {
-        const player = await this.prisma.player.findUnique({ where: { name: name } })
-        if(!player){
-            return null
-        }
-        return player
+    // async findByName(name: string): Promise<Player | null> {
+    //     const player = await this.prisma.player.findUnique({ where: { name: name } })
+    //     if(!player){
+    //         return null
+    //     }
+    //     return player
 
-    }
+    // }
     async findByEmail(email: string): Promise<Player | null> {
         const player = await this.prisma.player.findUnique({where:{email:email}})
         if(!player) return null

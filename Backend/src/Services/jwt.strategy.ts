@@ -9,14 +9,19 @@ export class JwtStrategy extends PassportStrategy(Strategy){
 
      constructor(){
         super({
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+            jwtFromRequest: ExtractJwt.fromExtractors([
+                (req)=>{
+                    return req?.cookies?.access_token
+                },
+                ExtractJwt.fromAuthHeaderAsBearerToken()
+            ]),
             ignoreExpiration:false,
             secretOrKey: process.env.JWT_SECRET_KEY || 'secret',
         })
      }
 
     validate(payload:any): unknown {
-        return {userId: payload.userId}
+        return {userId: payload.sub}
     }
     
 }

@@ -4,7 +4,7 @@ import { min } from "rxjs";
 
 export class PlayerAddRequest
 {
-    name:String
+   
 
     @IsEmail()
     email:String

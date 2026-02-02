@@ -48,9 +48,15 @@ export class TeamService extends ITeamService {
     const validation = this.validator.canCreateTeam(player)
     if(!validation.isValid) throw new BadRequestException(validation.message)
 
-   
     
-    const team = await this.repository.createTeam(payload,userId,avatar)
+    
+    
+    const team =  await this.repository.transaction(async (tx)=>{
+
+     const team = await  this.repository.createTeam(payload,userId,avatar,tx)
+     await this.playerFassade.updateTeam(team.id,userId,tx)
+     return team 
+    }) 
 
     return plainToInstance(
       TeamResponse, team, { excludeExtraneousValues: true },

@@ -18,12 +18,14 @@ export class TeamValidador extends ITeamValidator {
 
 
     canCreateTeam(player: PlayerResponse): ValidationResult {
+        
 
-        if (player.teamId !== null) {
+        if (player.teamId !== null && player.teamId !== undefined) {
             return {
                 isValid: false,
                 message: "Player already in a team"
             }
+          
         }
         return {
             isValid: true
@@ -32,12 +34,14 @@ export class TeamValidador extends ITeamValidator {
     }
 
     canJoinTeam(team: Team, player: Player): ValidationResult {
+        
         if (player.teamId !== null) {
             return {
                 isValid: false,
                 message: "Player already in a team"
             }
         }
+        
         return{
             isValid:true
         }

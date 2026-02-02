@@ -18,7 +18,6 @@ import type {
   MatchResponse,
   PlayerAddRequest,
   PlayerControllerGetById200,
-  PlayerControllerLogin201,
   TeamControllerDeleteTeam200,
   TeamControllerGetTeamByNameParams,
   TeamCreateRequest,
@@ -68,7 +67,7 @@ const playerControllerRegister = <TData = AxiosResponse<void>>(
     );
   }
 
-const playerControllerLogin = <TData = AxiosResponse<PlayerControllerLogin201>>(
+const playerControllerLogin = <TData = AxiosResponse<void>>(
     loginRequest: LoginRequest, options?: AxiosRequestConfig
  ): Promise<TData> => {
     return axios.post(
@@ -159,7 +158,7 @@ export type AppControllerGetHelloResult = AxiosResponse<string>
 export type AppControllerGetByeResult = AxiosResponse<string>
 export type PlayerControllerGetByIdResult = AxiosResponse<PlayerControllerGetById200>
 export type PlayerControllerRegisterResult = AxiosResponse<void>
-export type PlayerControllerLoginResult = AxiosResponse<PlayerControllerLogin201>
+export type PlayerControllerLoginResult = AxiosResponse<void>
 export type TeamControllerGetTeamByNameResult = AxiosResponse<TeamResponse[]>
 export type TeamControllerRegisterTeamResult = AxiosResponse<TeamResponse>
 export type TeamControllerGetTeamResult = AxiosResponse<TeamResponse>

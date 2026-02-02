@@ -3,6 +3,7 @@ import { ITokenService } from "./IToken.service";
 import { LoginRequest } from "src/DTO/LoginRequest.dto";
 import * as bcrypt from 'bcrypt'
 import { IPlayerService } from "./IPlayer.service";
+import { IFaceitService } from "./IFaceitService";
 
 
 
@@ -12,7 +13,10 @@ export class AuthService {
         @Inject(ITokenService)
         private tokenService: ITokenService,
         @Inject(forwardRef(()=>IPlayerService))
-        private playerService: IPlayerService) { }
+        private playerService: IPlayerService,
+        @Inject(IFaceitService)
+        private faceitService:IFaceitService) 
+        {}
 
     async validate(payload: LoginRequest) {
 
@@ -25,7 +29,18 @@ export class AuthService {
             throw new UnauthorizedException("Invalid password")
         }
         return await this.tokenService.generateToken(player)
-     
+
+    }
+
+
+    async validateViaFaceit(payload:any) {        
+         const faceitProfile = await this.faceitService.getOrCreate(payload)
+         if(!faceitProfile) throw new BadRequestException("Failed to create faceit account")
+         
+        return await this.tokenService.generateToken({id:faceitProfile.playerId})
+        
+        
+
     }
 
 }
