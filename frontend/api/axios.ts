@@ -6,8 +6,6 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080"
 
 const baseConfig = {
     baseURL: baseUrl,
-
-    timeout: 500
 }
 
 

@@ -41,7 +41,7 @@ export class TeamController{
     @Post()
     @UseInterceptors(FileInterceptor("avatar",{
         storage:diskStorage({
-            destination:'./uploads/teams',
+            destination:'./Uploads/teams',
             filename:(req,file,cb)=>{
                 const uuid = randomUUID()
                 const ext = extname(file.originalname)

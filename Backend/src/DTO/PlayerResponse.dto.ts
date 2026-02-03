@@ -1,8 +1,8 @@
 import { Exclude,Expose, Type } from "class-transformer";
 import { IsString } from "class-validator";
 import { TeamResponse } from "./TeamReponse.dto";
-import { FaceitUserRequstDto } from "./FaceitUserRequest.dto";
-import { FaceitUserResponse } from "./FaceitUserResponse.dto";
+import { FaceitUserRequstDto } from "./Faceit/FaceitUserRequest.dto";
+import { FaceitUserResponse } from "./Faceit/FaceitUserResponse.dto";
 
 
 
@@ -11,7 +11,7 @@ export class PlayerResponse
 {
     @Expose()
     id : String
-    
+
     @Expose()
     email: String 
 

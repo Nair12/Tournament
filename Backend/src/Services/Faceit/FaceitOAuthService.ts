@@ -1,6 +1,6 @@
 import FaceitVisa from 'faceit-visa';
 import { Injectable } from '@nestjs/common';
-import { FaceitUserRequstDto } from 'src/DTO/FaceitUserRequest.dto';
+import { FaceitUserRequstDto } from 'src/DTO/Faceit/FaceitUserRequest.dto';
 
 @Injectable()
 export class FaceitOAuthService {

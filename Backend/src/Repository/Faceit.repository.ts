@@ -6,7 +6,7 @@ import { IPlayerService } from "src/Services/IPlayer.service";
 import { randomUUID } from "node:crypto";
 import { PrismaService } from "prisma/PrismaClient";
 import { FaceitUser } from "faceit-visa";
-import { FaceitUserRequstDto } from "src/DTO/FaceitUserRequest.dto";
+import { FaceitUserRequstDto } from "src/DTO/Faceit/FaceitUserRequest.dto";
 
 
 @Injectable()

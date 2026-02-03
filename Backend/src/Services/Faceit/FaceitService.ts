@@ -2,14 +2,16 @@ import { Inject, Injectable, NotImplementedException } from "@nestjs/common";
 import { FaceitProfile } from "@prisma/client";
 import { IFaceitService } from "./IFaceitService";
 import { IFaceitRepository } from "src/Repository/IFaceit.repository";
-import { IPlayerService } from "./IPlayer.service";
+import { IPlayerService } from "../IPlayer.service";
 import { randomUUID } from "node:crypto";
 import { FaceitUser } from "faceit-visa";
-import { FaceitUserRequstDto } from "src/DTO/FaceitUserRequest.dto";
+import { FaceitUserRequstDto } from "src/DTO/Faceit/FaceitUserRequest.dto";
+import { FaceitStatsDto } from "src/DTO/Faceit/FaceitStatsReponse.dto";
 
 
 @Injectable()
 export class FaceitService extends IFaceitService {
+    
 
     constructor
         (@Inject(IFaceitRepository) private faceitRepository: IFaceitRepository,
@@ -17,6 +19,10 @@ export class FaceitService extends IFaceitService {
 
         ) {
         super()
+    }
+    async getStats(): Promise<FaceitStatsDto> {
+        
+        throw new Error("Method not implemented.");
     }
 
     async getOrCreate(payload:FaceitUserRequstDto): Promise<FaceitProfile> {

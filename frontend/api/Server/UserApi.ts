@@ -13,6 +13,12 @@ export const ServerUserApi = {
         
         const res = await axios.get('/Player/me')
         return res.data
+    },
+    getUserStats:async(cookie?:string)=>{
+        const axios  = createServerAxios(cookie)
+        
+        const res = await axios.get('/Faceit/me/stats')
+        return res.data 
     }
 
 
