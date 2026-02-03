@@ -11,12 +11,16 @@ import { FaceitUserRequstDto } from "src/DTO/Faceit/FaceitUserRequest.dto";
 
 @Injectable()
 export class FaceitRepository extends IFaceitRepository{
+    
 
     constructor(
         
         private prisma: PrismaService,
     ){
         super()
+    }
+   async updateStats(payload: FaceitStats): Promise<void> {
+        throw new Error("Method not implemented.");
     }
 
     async getOrCreate(payload:FaceitUserRequstDto): Promise<FaceitProfile> {
