@@ -1,6 +1,8 @@
 import { Exclude,Expose, Type } from "class-transformer";
 import { IsString } from "class-validator";
 import { TeamResponse } from "./TeamReponse.dto";
+import { FaceitUserRequstDto } from "./Faceit/FaceitUserRequest.dto";
+import { FaceitUserResponse } from "./Faceit/FaceitUserResponse.dto";
 
 
 
@@ -11,25 +13,19 @@ export class PlayerResponse
     id : String
 
     @Expose()
-    @IsString()
-    name:String
-
-    @Expose()
-    @IsString()
-    login:String
-
-    @Expose()
     email: String 
 
-   @Expose()
-   password: String 
- 
-   
+    password: String 
+    
    createdAt: Date
 
    updatedAt: Date
 
    teamId: String
+
+   @Expose()
+   @Type(()=>FaceitUserResponse)
+   faceitProfile? :FaceitUserResponse
     
    @Expose()
    @Type(()=>TeamResponse)

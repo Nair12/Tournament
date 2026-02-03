@@ -1,6 +1,6 @@
 import FaceitVisa from 'faceit-visa';
 import { Injectable } from '@nestjs/common';
-import { FaceitUserDto } from 'src/DTO/FaceitUser.dto';
+import { FaceitUserRequstDto } from 'src/DTO/Faceit/FaceitUserRequest.dto';
 
 @Injectable()
 export class FaceitOAuthService {
@@ -18,15 +18,14 @@ export class FaceitOAuthService {
         return this.faceit.exchangeCode(code, codeVerifier);
     }
 
-    async getProfile(accessToken: string): Promise<FaceitUserDto | null> {
+    async getProfile(accessToken: string): Promise<FaceitUserRequstDto | null> {
         const profile =  await this.faceit.getUserProfile(accessToken);
         const mappedProfile = this.mapVisaProfileToDto(profile)
         if (!mappedProfile) return null 
         return mappedProfile
-
     }
 
-    private mapVisaProfileToDto(profile: any): FaceitUserDto | null {
+    private mapVisaProfileToDto(profile: any): FaceitUserRequstDto | null {
 
         if (!profile) return null;
         return {

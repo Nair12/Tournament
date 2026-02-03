@@ -34,7 +34,7 @@ export const nav = [
        url: "/team/create"
     },
     {
-        title: "Create tournament",
+        title: "Create request",
         icon:PencilSquareIcon,
         url:"/tournament/register"
 

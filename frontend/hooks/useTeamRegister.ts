@@ -1,4 +1,4 @@
-import { TeamApi } from "@/api/TeamApi";
+import { TeamApi } from "@/api/Client/TeamApi";
 import { useMutation } from "@tanstack/react-query";
 
 

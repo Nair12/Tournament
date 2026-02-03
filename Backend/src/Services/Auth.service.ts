@@ -3,7 +3,7 @@ import { ITokenService } from "./IToken.service";
 import { LoginRequest } from "src/DTO/LoginRequest.dto";
 import * as bcrypt from 'bcrypt'
 import { IPlayerService } from "./IPlayer.service";
-import { IFaceitService } from "./IFaceitService";
+import { IFaceitService } from "./Faceit/IFaceitService";
 
 
 

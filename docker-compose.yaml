@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:15-alpine
+    restart: always
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5433:5432"
+  
+  backend:
+       build:
+          context: ./Backend 
+          dockerfile: DockerFile    
+       restart: always
+       depends_on:
+           db:
+             condition: service_healthy
+       volumes:
+            - uploads_data:/app/Uploads 
+       env_file:
+            - Backend/.env
+       ports:
+           - "8080:8080"
+
+
+
+volumes:
+  pg_data:
+  uploads_data:
+
+      

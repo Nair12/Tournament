@@ -4,20 +4,24 @@ import React from 'react';
 import { nav } from "./nav";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useUserStore } from '@/app/_providers/UserProvider';
 
 const  Sidebar = () => {
     const pathname = usePathname();
 
+   
+    const userFromStore = useUserStore((u)=>u.user)
+
+   
     return (
-        <div className="flex flex-col h-full py-6">
-           
+        <div className="flex flex-col h-full py-6">   
             <div className="px-8 mb-12">
                 <div className="flex items-center gap-3 group cursor-pointer">         
                          <img src='/favicon.png' className=' size-45 object-contain'/>      
                 </div>
             </div>
 
-            {/* Навигация */}
+        
             <nav className="flex-1 px-4 space-y-1.5">
                 {nav.map((item, idx) => {
                     const Icon = item.icon;

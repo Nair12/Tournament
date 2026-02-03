@@ -1,4 +1,4 @@
-import { UserApi } from "@/api/UserApi";
+import { UserApi } from "@/api/Client/UserApi";
 import { LoginRequest } from "@/models/generated.schemas";
 import { useMutation } from "@tanstack/react-query";
 

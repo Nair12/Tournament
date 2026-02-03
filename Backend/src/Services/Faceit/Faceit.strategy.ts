@@ -1,6 +1,6 @@
 import { PassportStrategy } from "@nestjs/passport";
 import { StateStore, StateStoreStoreCallback, StateStoreVerifyCallback, Strategy } from "passport-oauth2";
-import { AuthService } from "./Auth.service";
+import { AuthService } from "../Auth.service";
 import { Inject, Injectable } from "@nestjs/common";
 
 

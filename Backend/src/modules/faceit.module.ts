@@ -2,11 +2,11 @@ import { forwardRef, Module } from "@nestjs/common";
 import { FaceitController } from "src/Controllers/Faceit.controller";
 import { FaceitRepository } from "src/Repository/Faceit.repository";
 import { IFaceitRepository } from "src/Repository/IFaceit.repository";
-import { FaceitService } from "src/Services/FaceitService";
-import { IFaceitService } from "src/Services/IFaceitService";
+import { FaceitService } from "src/Services/Faceit/FaceitService";
+import { IFaceitService } from "src/Services/Faceit/IFaceitService";
 import { PlayerModule } from "./player.module";
 import { AuthModule } from "./auth.module";
-import { FaceitOAuthService } from "src/Services/FaceitOAuthService";
+import { FaceitOAuthService } from "src/Services/Faceit/FaceitOAuthService";
 
 
 

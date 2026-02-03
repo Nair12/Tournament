@@ -1,8 +1,8 @@
 import { Controller, Get, Inject, Post, Query, Req, Res, Session, UseGuards } from "@nestjs/common";
-import { IFaceitService } from "src/Services/IFaceitService";
+import { IFaceitService } from "src/Services/Faceit/IFaceitService";
 import { AuthGuard } from "@nestjs/passport";
 import * as express from 'express';
-import { FaceitOAuthService } from "src/Services/FaceitOAuthService";
+import { FaceitOAuthService } from "src/Services/Faceit/FaceitOAuthService";
 import { session } from "passport";
 import { AuthService } from "src/Services/Auth.service";
 
@@ -25,10 +25,15 @@ export class FaceitController {
         res.redirect(url)
 
     }
+    @Get()
+    async stats(@Req()req){
+        
+
+    }
 
 
     @Get("callback")
-    async loginCallback(@Res({ passthrough: true }) res: express.Response, @Req() req, @Query('code') code: string,
+    async loginCallback(@Res() res: express.Response, @Req() req, @Query('code') code: string,
         @Session() session) {
 
 
@@ -46,6 +51,7 @@ export class FaceitController {
             maxAge: 3600000,
             sameSite: 'lax',
             secure: false,
+            path: '/',
         })
 
 
@@ -55,6 +61,6 @@ export class FaceitController {
 
     }
 
-  
+
 
 }

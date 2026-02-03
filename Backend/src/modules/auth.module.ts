@@ -6,7 +6,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TokenModule } from './token.module';
 import { PlayerModule } from './player.module';
-import { FaceitStrategy } from 'src/Services/Faceit.strategy';
+import { FaceitStrategy } from 'src/Services/Faceit/Faceit.strategy';
 import { FaceitModule } from './faceit.module';
 
 @Module({
