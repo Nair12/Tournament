@@ -7,6 +7,7 @@ import { randomUUID } from "node:crypto";
 import { FaceitUser } from "faceit-visa";
 import { FaceitUserRequstDto } from "src/DTO/Faceit/FaceitUserRequest.dto";
 import { FaceitStatsDto } from "src/DTO/Faceit/FaceitStatsReponse.dto";
+import { plainToInstance } from "class-transformer";
 
 
 @Injectable()
@@ -20,9 +21,9 @@ export class FaceitService extends IFaceitService {
         ) {
         super()
     }
-    async getStats(): Promise<FaceitStatsDto> {
-        
-        throw new Error("Method not implemented.");
+    async getStats(faceitId:string): Promise<FaceitStatsDto> {
+       const res = this.faceitRepository.getStats(faceitId)
+       return plainToInstance(FaceitStatsDto,res,{excludeExtraneousValues:true})      
     }
 
     async getOrCreate(payload:FaceitUserRequstDto): Promise<FaceitProfile> {

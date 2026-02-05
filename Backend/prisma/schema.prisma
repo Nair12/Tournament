@@ -51,12 +51,13 @@ model FaceitProfile{
     nickname String
     avatar String?
     
- 
-
+    elo Int @default(0)
+    skillLevel Int @default(0)
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
     stats FaceitStats?
+    country String @default("UK")
 
 }
 
@@ -64,17 +65,12 @@ model FaceitStats{
     id String @id @default(uuid())
     faceitProfileId String @unique
     faceitProfile FaceitProfile @relation(fields: [faceitProfileId],references: [id])
-    mathes Int
-    country String
+    matсhes Int
     kdRatio Float
     winRate Float
     avg Float
     
     adr Float
-    skillLevel Int
-    elo Int
-    
-  
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 

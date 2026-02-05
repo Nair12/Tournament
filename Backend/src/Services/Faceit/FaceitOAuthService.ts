@@ -1,6 +1,7 @@
 import FaceitVisa from 'faceit-visa';
 import { Injectable } from '@nestjs/common';
 import { FaceitUserRequstDto } from 'src/DTO/Faceit/FaceitUserRequest.dto';
+import { PROPERTY_DEPS_METADATA } from '@nestjs/common/constants';
 
 @Injectable()
 export class FaceitOAuthService {
@@ -33,6 +34,8 @@ export class FaceitOAuthService {
             nickname: profile.nickname,
             email: profile.email,
             picture: profile.picture ?? null,
+            skillLevel: profile.skill_level,
+            elo: profile.elo,
         };
     }
 }

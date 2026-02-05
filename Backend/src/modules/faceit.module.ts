@@ -7,11 +7,16 @@ import { IFaceitService } from "src/Services/Faceit/IFaceitService";
 import { PlayerModule } from "./player.module";
 import { AuthModule } from "./auth.module";
 import { FaceitOAuthService } from "src/Services/Faceit/FaceitOAuthService";
+import { FaceitDataOrchestrator } from "src/Repository/FaceitDataOrchestrator.repository";
+import { FaceitRedisRepository } from "src/Repository/FaceitRedis.repository";
+import { FaceitApiService } from "src/Services/Faceit/FaceitApiService";
+import { IFaceitApiService } from "src/Services/Faceit/IFaceitApi.service";
+import { RedisModule } from "./redis.module";
 
 
 
 @Module({
-    imports:[forwardRef(()=>PlayerModule), forwardRef(()=>AuthModule)],
+    imports:[forwardRef(()=>PlayerModule), forwardRef(()=>AuthModule),RedisModule],
     controllers:[FaceitController],
     providers:[
         {
@@ -19,10 +24,21 @@ import { FaceitOAuthService } from "src/Services/Faceit/FaceitOAuthService";
             useClass:FaceitService,
         },
         {
-            provide:IFaceitRepository,
-            useClass:FaceitRepository,
+            provide:IFaceitApiService,
+            useClass:FaceitApiService
         },
-        FaceitOAuthService
+         FaceitRepository,
+         FaceitRedisRepository,
+         FaceitOAuthService,
+        
+        {
+            provide:IFaceitRepository,
+            useClass:FaceitDataOrchestrator,
+        },
+      
+      
+
+        
     ],
     exports:[IFaceitService]
 })
