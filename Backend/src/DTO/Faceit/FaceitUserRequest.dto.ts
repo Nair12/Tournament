@@ -15,6 +15,9 @@ export class FaceitUserRequstDto {
   email: string;        
 
   @Expose()
+  country: string 
+
+  @Expose()
   @Transform(({ obj }) => obj.avatar || obj.picture)
   picture?: string;
 

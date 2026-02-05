@@ -1,11 +1,11 @@
-import { Exclude, Expose, Type, Transform } from "class-transformer";
+import { Exclude, Expose, Type, Transform, plainToInstance } from "class-transformer";
 import { FaceitSegmentStats } from "./FaceitSegmentsStats.dto";
 
 @Exclude()
 export class FaceitStatsDto {
 
     @Expose()
-    @Transform(({obj})=> obj.player_id)
+    @Transform(({ obj }) => obj.player_id)
     faceitId: string
 
     @Expose()
@@ -34,14 +34,20 @@ export class FaceitStatsDto {
     longestWinStreak: string;
 
     @Expose()
-    // Добавляем ADR (если ты его считаешь вручную или берешь среднее из сегментов)
-    @Transform(({ obj }) => obj.adr || "0")
+    @Transform(({ obj }) => obj.lifetime?.['ADR']|| obj.adr || "0")
     adr: string;
 
     @Expose()
-    @Type(() => FaceitSegmentStats)
-    // ОШИБКА БЫЛА ТУТ: Transform должен стоять ПЕРЕД @Type в некоторых версиях, 
-    // чтобы правильно направить массив в декоратор.
-    @Transform(({ obj }) => obj.segments || obj.segmentStats)
+    @Transform(({ obj }) => {
+        const rawSegments = obj.segments || obj;
+        if (!rawSegments || !Array.isArray(rawSegments)) {
+            console.log("Segments empty");
+            return [];
+        }
+
+        return rawSegments.map(item =>
+            plainToInstance(FaceitSegmentStats, item, { excludeExtraneousValues: true })
+        );
+    })
     segmentStats: FaceitSegmentStats[];
 }

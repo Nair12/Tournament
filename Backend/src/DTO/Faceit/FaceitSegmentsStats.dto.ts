@@ -2,7 +2,7 @@ import { Exclude, Expose, Transform } from "class-transformer";
 @Exclude()
 export class FaceitSegmentStats {
     @Expose()
-    @Transform(({ obj }) => obj.label || obj.mapName)
+    @Transform(({ obj }) => obj.label || obj.map)
     mapName: string; // Например: "de_mirage"
 
     @Expose()
@@ -30,7 +30,6 @@ export class FaceitSegmentStats {
     triples: string;
 
     @Expose()
-    // ADR часто нет в стандартных сегментах, но если оно появится в будущем:
-    @Transform(({ obj }) => obj.stats?.['Average ADR'] || obj.adr || "0")
+    @Transform(({ obj }) => obj.stats?.['ADR'] || obj.adr || "0")
     adr: string;
 }

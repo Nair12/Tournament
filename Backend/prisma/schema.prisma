@@ -65,7 +65,7 @@ model FaceitStats{
     id String @id @default(uuid())
     faceitProfileId String @unique
     faceitProfile FaceitProfile @relation(fields: [faceitProfileId],references: [id])
-    matсhes Int
+    matches Int
     kdRatio Float
     winRate Float
     avg Float
@@ -82,7 +82,7 @@ model FaceitStats{
 
 model SegmentStats{
     id String @id @default(uuid())
-    faceitStatsId String
+    faceitStatsId String 
 
     faceitStats FaceitStats @relation(fields: [faceitStatsId],references: [id])
 

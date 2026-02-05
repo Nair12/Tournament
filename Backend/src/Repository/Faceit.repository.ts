@@ -34,7 +34,7 @@ export class FaceitRepository extends IFaceitRepository {
                     createMany: {
                         data: payload.segmentStats.map(s => ({
                             kdRatio:parseFloat(s.kdRatio),
-                            adr:parseFloat(s.adr),
+                            adr:parseFloat(payload.adr),
                             map:s.mapName,
                             winRate:parseFloat(s.winRate),
                             matches:s.matches,
@@ -51,12 +51,12 @@ export class FaceitRepository extends IFaceitRepository {
                     kdRatio: parseFloat(payload.kdRatio),
                     winRate: parseFloat(payload.winRate),
                     avg: payload.avg,
-                    matсhes: payload.matches,
+                    matches: payload.matches,
                     segments:{
                         createMany:{
                             data: payload.segmentStats.map(s=>({
                                  kdRatio:parseFloat(s.kdRatio),
-                                 adr:parseFloat(s.adr),
+                                 adr:parseFloat(payload.adr),
                                  map:s.mapName,
                                  winRate:parseFloat(s.winRate),
                                  matches:s.matches,

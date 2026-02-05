@@ -5,6 +5,7 @@ import * as express from 'express';
 import { FaceitOAuthService } from "src/Services/Faceit/FaceitOAuthService";
 import { session } from "passport";
 import { AuthService } from "src/Services/Auth.service";
+import { JwtAuthGuard } from "src/Guard/jwt.auth.guard";
 
 @Controller("faceit")
 export class FaceitController {
@@ -18,8 +19,17 @@ export class FaceitController {
         private readonly authService: AuthService
     ) { }
 
+    @Get("me/stats")
+    @UseGuards(JwtAuthGuard)
+    async getStats(@Req()req)
+    {
+      const id = req.user.faceitId
+      const res = await this.faceitServie.getStats(id)
+      return res 
+    }
+
     @Get("stats/:id")
-    async getStats(@Param('id') id:string)
+    async getStatsById(@Param('id') id:string)
     {
         const res = await this.faceitServie.getStats(id)
         return res 

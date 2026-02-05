@@ -6,6 +6,7 @@ import React from 'react';
 
 const DropDown = () => {
     const user = useUserStore((u) => u.user?.faceitProfile)
+    
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className="outline-none">
@@ -19,9 +20,10 @@ const DropDown = () => {
 
             <DropdownMenuContent className="w-65 bg-zinc-950 border-white/[0.05] text-white">
                 <DropdownMenuLabel>{user?.nickname}</DropdownMenuLabel>
+    
                 <DropdownMenuSeparator className="bg-white/[0.05]" />
 
-                <DropdownMenuItem className="cursor-pointer focus:bg-zinc-900 focus:text-white">
+                <DropdownMenuItem className="cursor-pointer focus:bg-zinc-900 focus:text-white" onClick={ ()=>window.location.href='/profile'}>
                     Profile
                 </DropdownMenuItem>
                 <DropdownMenuItem className="cursor-pointer focus:bg-zinc-900 focus:text-white">

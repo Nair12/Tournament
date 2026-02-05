@@ -23,9 +23,35 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface FaceitSegmentStats {
+  mapName: string;
+  mapImage: string;
+  matches: number;
+  winRate: string;
+  kdRatio: string;
+  wins: number;
+  triples: string;
+  adr: string;
+}
+
+export interface FaceitStatsDto {
+  faceitId: string;
+  kdRatio: string;
+  matches: number;
+  winRate: string;
+  avg: number;
+  currentWinStreak: string;
+  longestWinStreak: string;
+  adr: string;
+  segmentStats: FaceitSegmentStats[];
+}
+
 export interface FaceitUserResponse {
   nickname: string;
   avatar?: string;
+  elo: number;
+  country: string;
+  skillLevel: number;
 }
 
 export type TeamResponseId = { [key: string]: unknown };
@@ -36,6 +62,7 @@ export interface TeamResponse {
   id: TeamResponseId;
   name: TeamResponseName;
   players: PlayerResponse[];
+  avatar: string;
 }
 
 export type PlayerResponseId = { [key: string]: unknown };
