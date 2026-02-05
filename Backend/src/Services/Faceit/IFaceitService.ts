@@ -8,7 +8,7 @@ export abstract class IFaceitService{
 
 
     abstract getOrCreate(payload: any): Promise<FaceitProfile>;
-    abstract getStats():Promise<FaceitStatsDto>
+    abstract getStats(faceitId:string):Promise<FaceitStatsDto>
     
     
 }

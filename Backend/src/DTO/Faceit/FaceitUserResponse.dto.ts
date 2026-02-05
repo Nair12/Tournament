@@ -7,4 +7,8 @@ export class FaceitUserResponse {
     nickname: string;
     @Expose()
     avatar?: string;
+    @Expose()
+    elo: number;    
+    @Expose()
+    skillLevel: number;
 }
