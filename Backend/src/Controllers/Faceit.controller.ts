@@ -23,7 +23,9 @@ export class FaceitController {
     @UseGuards(JwtAuthGuard)
     async getStats(@Req()req)
     {
+      console.log("Stats started")
       const id = req.user.faceitId
+      req.user.faceitId
       const res = await this.faceitServie.getStats(id)
       return res 
     }

@@ -1,5 +1,7 @@
 import { Exclude, Expose, Type, Transform, plainToInstance } from "class-transformer";
 import { FaceitSegmentStats } from "./FaceitSegmentsStats.dto";
+import { ConsoleLogger } from "@nestjs/common";
+import { raw } from "express";
 
 @Exclude()
 export class FaceitStatsDto {
@@ -25,7 +27,6 @@ export class FaceitStatsDto {
     avg: number;
 
     @Expose()
-    // Добавляем текущую серию побед (Longest Win Streak / Current Win Streak)
     @Transform(({ obj }) => obj.lifetime?.['Current Win Streak'] || obj.currentWinStreak)
     currentWinStreak: string;
 
@@ -39,7 +40,10 @@ export class FaceitStatsDto {
 
     @Expose()
     @Transform(({ obj }) => {
-        const rawSegments = obj.segments || obj;
+        const rawSegments = obj.segments;
+          
+        console.log("SEGMENTS:" + rawSegments)
+
         if (!rawSegments || !Array.isArray(rawSegments)) {
             console.log("Segments empty");
             return [];

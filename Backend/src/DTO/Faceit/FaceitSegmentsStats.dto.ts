@@ -6,8 +6,8 @@ export class FaceitSegmentStats {
     mapName: string; // Например: "de_mirage"
 
     @Expose()
-    @Transform(({ obj }) => obj.img_regular || obj.mapImage)
-    mapImage: string; // Ссылка на картинку карты
+    @Transform(({ obj }) => obj.img_regular || obj.imgRegular)
+    imgRegular: string; // Ссылка на картинку карты
 
     @Expose()
     @Transform(({ obj }) => Number(obj.stats?.Matches || obj.matches))

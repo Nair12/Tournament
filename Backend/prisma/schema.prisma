@@ -64,7 +64,7 @@ model FaceitProfile{
 model FaceitStats{
     id String @id @default(uuid())
     faceitProfileId String @unique
-    faceitProfile FaceitProfile @relation(fields: [faceitProfileId],references: [id])
+    faceitProfile FaceitProfile @relation(fields: [faceitProfileId],references: [faceitId])
     matches Int
     kdRatio Float
     winRate Float
@@ -85,6 +85,9 @@ model SegmentStats{
     faceitStatsId String 
 
     faceitStats FaceitStats @relation(fields: [faceitStatsId],references: [id])
+
+    imgSmall String?
+    imgRegular String?
 
     map String
 

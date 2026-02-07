@@ -1,4 +1,4 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { BadRequestException, Inject, Injectable } from "@nestjs/common";
 import { IFaceitRepository } from "./IFaceit.repository";
 import { FaceitProfile, FaceitStats, PrismaClient } from "@prisma/client";
 import { PlayerFassade } from "src/Fassade/PlayerFassade";
@@ -21,64 +21,70 @@ export class FaceitRepository extends IFaceitRepository {
         super()
     }
     async updateStats(payload: FaceitStatsDto): Promise<FaceitStats> {
+        const profileId = payload.faceitId;
 
-        const stats = await this.prisma.faceitStats.upsert({
-            where: { faceitProfileId: payload.faceitId },
-            update: {
-                adr: parseFloat(payload.adr),
-                kdRatio: parseFloat(payload.kdRatio),
-                winRate: parseFloat(payload.winRate),
-                avg: payload.avg,
-                segments: {
-                    deleteMany: {},
-                    createMany: {
-                        data: payload.segmentStats.map(s => ({
-                            kdRatio:parseFloat(s.kdRatio),
-                            adr:parseFloat(payload.adr),
-                            map:s.mapName,
-                            winRate:parseFloat(s.winRate),
-                            matches:s.matches,
-                            headshotPercentage:0,
-                        })),
-                    }
+        const existingStats = await this.prisma.faceitStats.findUnique({
+            where: { faceitProfileId: profileId },
+        });
 
-
-
-                },
-            },
-                create: {
-                    adr: parseFloat(payload.adr),
-                    kdRatio: parseFloat(payload.kdRatio),
-                    winRate: parseFloat(payload.winRate),
-                    avg: payload.avg,
-                    matches: payload.matches,
-                    segments:{
-                        createMany:{
-                            data: payload.segmentStats.map(s=>({
-                                 kdRatio:parseFloat(s.kdRatio),
-                                 adr:parseFloat(payload.adr),
-                                 map:s.mapName,
-                                 winRate:parseFloat(s.winRate),
-                                 matches:s.matches,
-                                 headshotPercentage:0,
-
+        if (existingStats) {
+          
+            return this.prisma.faceitStats.update({
+                where: { faceitProfileId: profileId },
+                data: {
+                    adr: parseFloat(payload.adr) || 0,
+                    kdRatio: parseFloat(payload.kdRatio) || 0,
+                    winRate: parseFloat(payload.winRate) || 0,
+                    avg: payload.avg || 0,
+                    matches: payload.matches || 0,
+                    segments: {
+                        deleteMany: {},
+                        createMany: {
+                            data: payload.segmentStats.map(s => ({
+                                map: s.mapName || 'unknown',
+                                kdRatio: parseFloat(s.kdRatio) || 0,
+                                winRate: parseFloat(s.winRate) || 0,
+                                matches: s.matches || 0,
+                                adr: parseFloat(s.adr) || 0,
+                                headshotPercentage: 0,
+                                imgRegular:s.imgRegular,
                             }))
                         }
-                    },
+                    }
+                },
+                include:{segments:{orderBy:{kdRatio:"desc"}}}
+
+            });
+        } else {
+            return this.prisma.faceitStats.create({
+                data: {
+                    adr: parseFloat(payload.adr) || 0,
+                    kdRatio: parseFloat(payload.kdRatio) || 0,
+                    winRate: parseFloat(payload.winRate) || 0,
+                    avg: payload.avg || 0,
+                    matches: payload.matches || 0,
                     faceitProfile: {
-                        connect: {
-                            faceitId: payload.faceitId
-                        }
+                        connect: { faceitId: profileId }
                     },
-                    
+                    segments: {
+                        createMany: {
+                            data: payload.segmentStats.map(s => ({
+                                map: s.mapName || 'unknown',
+                                kdRatio: parseFloat(s.kdRatio) || 0,
+                                winRate: parseFloat(s.winRate) || 0,
+                                matches: s.matches || 0,
+                                adr: parseFloat(s.adr) || 0,
+                                headshotPercentage: 0,
+                                imgRegular:s.imgRegular,                        
+                            }))
+                        }
+                    }
+                },
+                include:{segments:{orderBy:{kdRatio: 'desc'}}}
+                
 
-                    
-
-                }
-            
-            })
-
-            return stats 
+            });
+        }
     }
 
     async getOrCreate(payload: FaceitUserRequstDto): Promise<FaceitProfile> {
@@ -100,7 +106,7 @@ export class FaceitRepository extends IFaceitRepository {
                 player: {
                     connect: { email: payload.email }
                 },
-                country:"UK"
+                country: "UK"
             }
         });
     }
@@ -108,7 +114,8 @@ export class FaceitRepository extends IFaceitRepository {
         throw new Error("Method not implemented.");
     }
     async getStats(faceitId: string): Promise<FaceitStats | null> {
-        const stats = await this.prisma.faceitStats.findUnique({ where: { faceitProfileId: faceitId }, include: { segments: true, weapons: true } })
+        const stats = await this.prisma.faceitStats.findUnique({ where: { faceitProfileId: faceitId }, include: { segments: {orderBy:{kdRatio:"desc"}}, weapons: true } })
+        console.log("Current stats:" + JSON.stringify(stats))
         return stats
 
     }
