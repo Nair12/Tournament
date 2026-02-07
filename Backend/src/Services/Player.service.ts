@@ -8,6 +8,7 @@ import { Player, Prisma } from "@prisma/client";
 import { AuthService } from "./Auth.service";
 import { LoginRequest } from "src/DTO/LoginRequest.dto";
 import * as bcrypt from 'bcrypt'
+import { PlayerWithProfile } from "src/Repository/Player.repository";
 
 @Injectable()
 export class PlayerService extends IPlayerService {
@@ -58,7 +59,7 @@ export class PlayerService extends IPlayerService {
 
 
 
-    async findByEmail(email: string): Promise<Player | null> {
+    async findByEmail(email: string): Promise<PlayerWithProfile | null> {
         const player = this.playerRepository.findByEmail(email)
         if (!player) return null
         return player

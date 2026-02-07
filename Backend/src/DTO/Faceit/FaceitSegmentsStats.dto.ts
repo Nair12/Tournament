@@ -2,12 +2,12 @@ import { Exclude, Expose, Transform } from "class-transformer";
 @Exclude()
 export class FaceitSegmentStats {
     @Expose()
-    @Transform(({ obj }) => obj.label || obj.mapName)
+    @Transform(({ obj }) => obj.label || obj.map)
     mapName: string; // Например: "de_mirage"
 
     @Expose()
-    @Transform(({ obj }) => obj.img_regular || obj.mapImage)
-    mapImage: string; // Ссылка на картинку карты
+    @Transform(({ obj }) => obj.img_regular || obj.imgRegular)
+    imgRegular: string; // Ссылка на картинку карты
 
     @Expose()
     @Transform(({ obj }) => Number(obj.stats?.Matches || obj.matches))
@@ -30,7 +30,6 @@ export class FaceitSegmentStats {
     triples: string;
 
     @Expose()
-    // ADR часто нет в стандартных сегментах, но если оно появится в будущем:
-    @Transform(({ obj }) => obj.stats?.['Average ADR'] || obj.adr || "0")
+    @Transform(({ obj }) => obj.stats?.['ADR'] || obj.adr || "0")
     adr: string;
 }

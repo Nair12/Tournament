@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { PlayerAddRequest } from "../DTO/PlayerAddRequset.dto";
 import { PlayerResponse } from "../DTO/PlayerResponse.dto";
 import { Player, Prisma } from "@prisma/client";
+import { PlayerWithProfile } from "./Player.repository";
 
 
 
@@ -14,7 +15,7 @@ export abstract class IPlayerRepository{
 
     // abstract findByName(name:string):Promise<Player | null>
 
-    abstract findByEmail(email:string):Promise<Player | null>
+    abstract findByEmail(email:string):Promise<PlayerWithProfile | null>
   
    abstract updateTeamId(teamId: string, playerId: string,tx?:Prisma.TransactionClient):Promise<Player>
     

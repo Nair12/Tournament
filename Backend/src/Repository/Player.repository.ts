@@ -2,11 +2,12 @@ import { PlayerAddRequest } from "src/DTO/PlayerAddRequset.dto";
 import { PlayerResponse } from "src/DTO/PlayerResponse.dto";
 import { IPlayerRepository } from "./IPlayer.repository";
 import { PrismaService } from "prisma/PrismaClient";
-import { Player, Prisma } from "@prisma/client";
+import { FaceitProfile, Player, Prisma } from "@prisma/client";
 import { Injectable } from "@nestjs/common";
 import { TeamCreateRequest } from "src/DTO/TeamCreateRequest.dto";
 
 
+export  type PlayerWithProfile = Player & { faceitProfile: FaceitProfile | null };
 
 @Injectable()
 export class PlayerRepository extends IPlayerRepository {
@@ -67,10 +68,11 @@ export class PlayerRepository extends IPlayerRepository {
     //     return player
 
     // }
-    async findByEmail(email: string): Promise<Player | null> {
-        const player = await this.prisma.player.findUnique({where:{email:email}})
+
+    async findByEmail(email: string): Promise<PlayerWithProfile | null> {
+        const player = await this.prisma.player.findUnique({where:{email:email},include:{faceitProfile:true}})
         if(!player) return null
-        return player
+        return player as PlayerWithProfile
 
     }
 

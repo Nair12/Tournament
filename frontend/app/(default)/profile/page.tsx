@@ -1,16 +1,29 @@
+'use server';
 import { ServerUserApi } from '@/api/Server/UserApi';
-import React from 'react';
+import Hero from './_components/Hero';
+import { headers } from 'next/headers';
+import Stats from './_components/Stats';
+import Segments from './_components/Segments';
 
-const Page = () => {
+export default async function FuturisticProfile() {
+   const cookieHeader = (await headers()).get('cookie') || '';
+   const stats = await ServerUserApi.getUserStats(cookieHeader);
 
-    const stats = ServerUserApi.getUserStats()
-    
-    return (
-        <div>
-            
+   console.log(stats)
 
-        </div>
-    );
+   if (!stats) return null;
+
+   return (
+      <div className="min-h-screen  text-zinc-100 font-mono selection:bg-zinc-100 selection:text-black">
+         <Hero />
+         <Stats stats={stats}/>
+         <Segments segments={stats.segmentStats}/>
+
+
+      </div>
+      )
 }
 
-export default Page;
+
+
+
