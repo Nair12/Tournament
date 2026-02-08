@@ -32,23 +32,21 @@ const TeamWidget = () => {
                 <div className="flex items-center gap-6">
                     {/* Avatar */}
                     <div className="relative">
-                        {/* <img
-                            src={team.avatar}
-                            alt={team.name}
+                        <img
+                            src={`http://localhost:8080/Uploads/teams/${team.avatar}`}
+                            alt={String(team.name)}
                             className="
                 w-20 h-20 rounded-xl object-cover
                 border border-white/10
                 shadow-[0_0_20px_rgba(255,255,255,0.05)]
               "
-                        /> */}
+                        />
                         <div className="absolute inset-0 rounded-xl ring-1 ring-white/10" />
                     </div>
 
                     {/* Info */}
                     <div className="flex flex-col">
-                        <p className="text-zinc-400 text-sm uppercase tracking-widest mb-1">
-                         Your team
-                        </p>
+                       
                         <h2 className="text-3xl font-semibold text-white">
                             {String(team.name)}
                         </h2>

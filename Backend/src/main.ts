@@ -4,26 +4,32 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
 
   const config = new DocumentBuilder()
-  .setTitle('Team Forge API')
-  .setDescription('Team forge API desc')
-  .setVersion("1.0")
-  .addBearerAuth()
-  .build()
+    .setTitle('Team Forge API')
+    .setDescription('Team forge API desc')
+    .setVersion("1.0")
+    .addBearerAuth()
+    .build()
 
-  const document = SwaggerModule.createDocument(app,config)
-  SwaggerModule.setup('swagger',app,document)
- app.use(cookieParser())
+  const document = SwaggerModule.createDocument(app, config)
+  SwaggerModule.setup('swagger', app, document)
+  app.use(cookieParser())
   app.enableCors({
-    origin:'http://localhost:3000',
-    credentials:true,
+    origin: 'http://localhost:3000',
+    credentials: true,
   }
   )
+
+  app.useStaticAssets('/app/Uploads', {
+    prefix: '/Uploads',
+  });
 
 
   app.use(
@@ -33,8 +39,8 @@ async function bootstrap() {
       saveUninitialized: false,
     }),
   );
-  
-  
+
+
 
   await app.listen(process.env.PORT ?? 8080);
 }

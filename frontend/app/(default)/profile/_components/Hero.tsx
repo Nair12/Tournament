@@ -1,9 +1,10 @@
 'use client';
 import { useUserStore } from '@/app/_providers/UserProvider';
+import { TrophyIcon } from 'lucide-react';
 
 export default function FuturisticProfile() {
 
-   
+
     const player = useUserStore((state) => state.user);
 
     if (!player) {
@@ -14,23 +15,24 @@ export default function FuturisticProfile() {
         );
     }
 
+
     return (
-        <div className=" text-zinc-100 p-4 md:p-10 font-mono tracking-tight">
-            {/* Background Glow */}
+        <div className=" text-zinc-100 p-4 md:p-10 font-mono tracking-tight ">
+          
             <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-zinc-900/30 blur-[120px] rounded-full -z-10" />
 
             <div className="max-w-6xl mx-auto space-y-6">
 
-                {/* TOP SECTION: GRID LAYOUT */}
+            
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-                    {/* MAIN CARD: IDENTITY */}
+             
                     <div className="lg:col-span-8 bg-zinc-950 border border-zinc-800/50 relative overflow-hidden group">
-                        {/* Scanline Effect */}
+                       
                         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(255,255,255,0.02)_50%)] bg-[length:100%_4px] pointer-events-none" />
 
                         <div className="p-8 flex flex-col md:flex-row items-center gap-10 relative z-10">
-                            {/* HEXAGON AVATAR BOX */}
+                        
                             <div className="relative">
                                 <div className="w-40 h-40 bg-zinc-900 clip-path-polygon border-2 border-zinc-700 p-1 group-hover:border-zinc-400 transition-colors duration-500">
                                     <img
@@ -53,13 +55,13 @@ export default function FuturisticProfile() {
                                     </h1>
                                 </div>
                                 <div className="flex flex-wrap items-center gap-8 py-4 border-y border-zinc-800/50">
-                                    {/* SKILL LEVEL BOX */}
+                                 
                                     <div className="flex items-center gap-4">
                                         <div className="relative w-12 h-12  flex items-center justify-center overflow-hidden">
-                                           
-                  
+
+
                                             <span className="text-2xl font-black text-white relative z-10 italic">
-                                                  <img src={`FaceitLevel/${player.faceitProfile?.skillLevel}.png`} alt='level'/>
+                                                <img src={`FaceitLevel/${player.faceitProfile?.skillLevel}.png`} alt='level' />
                                             </span>
                                         </div>
                                     </div>
@@ -71,7 +73,7 @@ export default function FuturisticProfile() {
                                             <span className="text-3xl font-black tracking-tighter text-zinc-100">
                                                 {player.faceitProfile?.elo}
                                             </span>
-                                            
+
                                         </div>
                                     </div>
 
@@ -80,7 +82,7 @@ export default function FuturisticProfile() {
                                         <p className="text-zinc-600 text-[9px] uppercase tracking-widest mb-1">Region_Origin</p>
                                         <div className="flex items-center gap-2">
                                             <span className="text-sm font-bold uppercase italic">
-                                                <img src={`https://flagcdn.com/w20/${player.faceitProfile?.country}.png`}/>
+                                                <img src={`https://flagcdn.com/w20/${player.faceitProfile?.country}.png`} />
                                             </span>
                                             <span className="w-2 h-2 bg-zinc-700 rounded-full" />
                                         </div>
@@ -91,7 +93,7 @@ export default function FuturisticProfile() {
                                     <span className="bg-zinc-800/50 border border-zinc-700 px-3 py-1 text-[11px] uppercase">
                                         Rank: Elite
                                     </span>
-                          
+
                                 </div>
                             </div>
                         </div>
@@ -102,28 +104,78 @@ export default function FuturisticProfile() {
                         </div>
                     </div>
 
-                    {/* SIDE CARD: SYSTEM STATUS */}
-                    <div className="lg:col-span-4 bg-zinc-900/20 border border-zinc-800/50 p-6 flex flex-col justify-between relative overflow-hidden backdrop-blur-md">
-                        <div className="space-y-4">
-                            <div className="flex justify-between items-center border-b border-zinc-800 pb-2">
-                                <span className="text-zinc-500 text-[10px] uppercase">System_Auth</span>
-                                <span className="text-green-500 text-[10px] animate-pulse">● ACTIVE</span>
+                    <div className="lg:col-span-4 flex flex-col gap-4">
+                        <div className="relative bg-zinc-950 border border-zinc-800 p-6 overflow-hidden group">
+                         
+                            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
+
+                     
+                            <div className="relative z-10 flex justify-between items-start mb-8">
+                                <div>
+                                    <p className="text-zinc-500 text-[9px] uppercase tracking-[0.3em]">Affiliation_Unit</p>
+                                    <h2 className="text-2xl font-black italic uppercase tracking-tighter mt-1">
+                                        {String(player.team?.name) ?? "No_Squad_Detected"}
+                                    </h2>
+                                </div>
+                                <div className="px-2 py-1 bg-zinc-100 text-black text-[9px] font-black uppercase italic">
+                                    ID: {player.team?.id?.toString().slice(0, 5) ?? "000"}
+                                </div>
                             </div>
-                            <div className="space-y-1">
-                                <p className="text-[10px] text-zinc-600 uppercase">Registered_Since</p>
-                                <p className="text-xl font-bold italic">{new Date(player.createdAt).getFullYear()}</p>
+
+                            <div className="relative flex justify-center py-6">
+                                <div className="relative group">
+                                    <div
+                                        className="  w-28 h-28 rounded-full bg-zinc-900 border border-white/1 overflow-hidden transition-shadow group-hover:shadow-[0_0_40px_rgba(255,255,255,0.12)] "
+                                    >
+                                        {player.team?.avatar ? (
+                                            <img
+                                                src={`http://localhost:8080/Uploads/teams/${player.team.avatar}`}
+                                                alt="Team Emblem"
+                                                className="w-full h-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="flex items-center justify-center w-full h-full">
+                                                <TrophyIcon className="w-10 h-10 text-zinc-600" />
+                                            </div>
+                                        )}
+                                    </div>
+
+                                 
+                                    <div className="absolute inset-0 rounded-full ring-1 ring-white/5 pointer-events-none" />
+                                </div>
                             </div>
-                            <div className="space-y-1">
-                                <p className="text-[10px] text-zinc-600 uppercase">Access_Level</p>
-                                <p className="text-xl font-bold italic underline decoration-zinc-700 underline-offset-4">PLAYER_V1</p>
+
+
+                            <div className="relative z-10 mt-8 space-y-3">
+                                <div className="flex justify-between items-center text-[10px] border-b border-zinc-800 pb-2">
+                                    <span className="text-zinc-500 uppercase tracking-widest">System_Status</span>
+                                    <span className="text-green-500 font-bold tracking-tighter">● SYNCHRONIZED</span>
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-2">
+                                    <div className="bg-zinc-900/50 p-2 border border-zinc-800/50">
+                                        <p className="text-zinc-600 text-[8px] uppercase">Established</p>
+                                        {/* <p className="text-xs font-bold italic">{player.team?.createdAt ? new Date(player.team.createdAt).getFullYear() : '2024'}</p> */}
+                                    </div>
+                                    <div className="bg-zinc-900/50 p-2 border border-zinc-800/50 text-right">
+                                        <p className="text-zinc-600 text-[8px] uppercase">Members</p>
+                                        <p className="text-xs font-bold italic">05/05</p>
+                                    </div>
+                                </div>
+
+                                <button className="w-full bg-zinc-100 hover:bg-white text-black py-3 text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:tracking-[0.4em] active:scale-95">
+                                    View_Squad_Data
+                                </button>
+                            </div>
+
+                            {/* Декоративный штрих-код или серийник снизу */}
+                            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 opacity-10 pointer-events-none">
+                                <p className="text-[8px] tracking-[1em] whitespace-nowrap">01101011 01100101 01111001</p>
                             </div>
                         </div>
-
-                        <button className="w-full mt-6 bg-zinc-100 text-black py-4 font-black uppercase text-xs hover:bg-zinc-300 transition-all active:scale-95">
-                            Sync_Faceit_Data
-                        </button>
                     </div>
                 </div>
+
 
                 {/* BOTTOM SECTION: SPECS */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">

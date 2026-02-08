@@ -41,19 +41,23 @@ export class TeamController{
     @Post()
     @UseInterceptors(FileInterceptor("avatar",{
         storage:diskStorage({
-            destination:'./Uploads/teams',
+        destination:'./Uploads/teams',
             filename:(req,file,cb)=>{
-                const uuid = randomUUID()
-                const ext = extname(file.originalname)
-                const filename = `${uuid}${ext}`
-                cb(null,filename)
-            }
-        })
+               const uuid = randomUUID()
+               const ext = extname(file.originalname)
+                 const filename = `${uuid}${ext}`
+                 cb(null,filename)
+             }
+         })
         
 
-    }))
+     }
+    ))
     async registerTeam(@Body() payload:TeamCreateRequest, @Req() req, @UploadedFile() file:Express.Multer.File)
     {
+        console.log("File"+  file.filename)
+        console.log("File original name " + file.originalname)
+
       
         const userId = req.user['userId']
         console.log(userId)
