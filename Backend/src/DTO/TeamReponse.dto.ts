@@ -17,6 +17,10 @@ export class TeamResponse
    players: PlayerResponse[]
 
    @Expose()
+   @Type(()=>PlayerResponse)
+   captain: PlayerResponse
+
+   @Expose()
    avatar: string
    
 }

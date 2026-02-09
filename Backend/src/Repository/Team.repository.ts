@@ -11,12 +11,15 @@ export class TeamRepository extends ITeamRepository {
   }
 
   async getTeam(id: string): Promise<Team | null> {
-    return await this.prisma.team.findUnique({
+    const team =  await this.prisma.team.findUnique({
       where: { id },
       include: {
-        players: true,
+        players: {include:{faceitProfile:true}},
+        captain:{include:{faceitProfile:true}},   
       },
     })
+    console.log("Team from db :" + JSON.stringify(team))
+    return team 
   }
 
   async createTeam(payload: TeamCreateRequest, userId: string, avatar: string, tx?: Prisma.TransactionClient): Promise<Team> {

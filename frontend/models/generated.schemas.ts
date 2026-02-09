@@ -25,7 +25,7 @@ export interface LoginRequest {
 
 export interface FaceitSegmentStats {
   mapName: string;
-  mapImage: string;
+  imgRegular: string;
   matches: number;
   winRate: string;
   kdRatio: string;
@@ -62,6 +62,7 @@ export interface TeamResponse {
   id: TeamResponseId;
   name: TeamResponseName;
   players: PlayerResponse[];
+  captain: PlayerResponse;
   avatar: string;
 }
 

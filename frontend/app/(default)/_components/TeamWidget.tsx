@@ -33,7 +33,7 @@ const TeamWidget = () => {
                     {/* Avatar */}
                     <div className="relative">
                         <img
-                            src={`http://localhost:8080/Uploads/teams/${team.avatar}`}
+                            src={`${process.env.NEXT_PUBLIC_API_URL }/Uploads/teams/${team.avatar}`}
                             alt={String(team.name)}
                             className="
                 w-20 h-20 rounded-xl object-cover

@@ -30,10 +30,12 @@ export class TeamController{
     
     @Get(":id")
     async getTeam(@Param('id')id:string){
-        const team = await this.service.deleteTeam(id)
+     
+        const team = await this.service.getTeam(id)
         if(!team){
             throw new NotFoundException()
         }
+        console.log("Team: " + JSON.stringify(team))
         return team
     }
 

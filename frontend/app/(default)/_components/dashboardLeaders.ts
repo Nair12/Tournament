@@ -4,6 +4,7 @@ export const topTeams = [
   { id: 't3', name: 'VOID_UNIT', rating: 1690, avatar: '/teams/void-unit.png' },
   { id: 't4', name: 'BLACK_SIGNAL', rating: 1622, avatar: '/teams/black-signal.png' },
   { id: 't5', name: 'PHANTOM_DIV', rating: 1588, avatar: '/teams/phantom.png' },
+
 ];
 
 export const topPlayers = [

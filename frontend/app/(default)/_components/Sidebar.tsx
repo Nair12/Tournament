@@ -1,10 +1,11 @@
 "use client"
 
 import React from 'react';
-import { nav } from "./nav";
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useUserStore } from '@/app/_providers/UserProvider';
+import { getSideBarNavigation } from './nav';
 
 const  Sidebar = () => {
     const pathname = usePathname();
@@ -12,7 +13,7 @@ const  Sidebar = () => {
    
     const userFromStore = useUserStore((u)=>u.user)
 
-   
+    const nav = getSideBarNavigation(userFromStore?.team)
     return (
         <div className="flex flex-col h-full py-6">   
             <div className="px-8 mb-12">
