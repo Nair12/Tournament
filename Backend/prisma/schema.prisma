@@ -180,7 +180,7 @@ model Resume {
 
   type ResumeType
 
-  
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
