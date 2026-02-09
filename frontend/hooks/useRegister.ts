@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
-import { UserApi } from "@/api/Client/UserApi"    
+import { UserApi } from "@/app/api/Client/UserApi"    
 
 
 export const useRegister = () =>{

@@ -27,13 +27,9 @@ export class TeamService extends ITeamService {
     if (!team) {
       return null
     }
-
+     console.log("Team before mapping: " +  JSON.stringify(team))
     return plainToInstance(
-      TeamResponse,
-      {
-        team
-      },
-      { excludeExtraneousValues: true },
+      TeamResponse,team, { excludeExtraneousValues: true },
     )
   }
 

@@ -1,8 +1,7 @@
+import { useUserStore } from '@/app/_providers/UserProvider';
+import { TeamResponse } from '@/models/generated.schemas';
+
 import {
-    ShieldCheckIcon,
-    SquaresPlusIcon,
-    CalendarDaysIcon,
-    MagnifyingGlassPlusIcon,
     UserGroupIcon,
     UserIcon,
     IdentificationIcon,
@@ -10,9 +9,16 @@ import {
     PlusIcon,
     TableCellsIcon,
     BookmarkIcon,
+    DocumentTextIcon
 } from '@heroicons/react/24/solid';
 
-export const nav = [
+const isInTeam = useUserStore
+
+
+export const getSideBarNavigation = (team?:TeamResponse)=>{
+    
+    
+    return [
     {
       title:"Dashboard",
       icon: BookmarkIcon,
@@ -28,11 +34,18 @@ export const nav = [
       icon: UserIcon,
       url:"/players"
     },
+   !!team?
     {
+       title: "Your Team ",
+       icon: DocumentTextIcon,
+       url: `/team/browse/${team.id}`
+    } :
+     {
        title: "Create team",
        icon: PlusIcon,
        url: "/team/create"
-    },
+    }
+    ,
     {
         title: "Create request",
         icon:PencilSquareIcon,
@@ -48,3 +61,8 @@ export const nav = [
 
     }
 ]
+
+
+}
+
+

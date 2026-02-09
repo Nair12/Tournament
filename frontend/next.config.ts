@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+   experimental: {
+    serverComponentsExternalPackages: ['hltv', 'got-scraping', 'header-generator'],
+  },
 };
 
 export default nextConfig;

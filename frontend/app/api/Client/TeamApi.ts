@@ -9,7 +9,7 @@ export const TeamApi = {
         try{
             const res = await clientAxios.post('/Team',formData,{
                 headers:{
-                    
+                    'Content-Type':"multipart/form-data"
                 }
             })
             return res.data;

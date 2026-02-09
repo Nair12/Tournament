@@ -1,5 +1,5 @@
 'use server';
-import { ServerUserApi } from '@/api/Server/UserApi';
+import { ServerUserApi } from '@/app/api/Server/UserApi';
 import Hero from './_components/Hero';
 import { headers } from 'next/headers';
 import Stats from './_components/Stats';

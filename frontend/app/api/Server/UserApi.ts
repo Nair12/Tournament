@@ -1,3 +1,4 @@
+import { TeamResponse } from "@/models/generated.schemas"
 import { createServerAxios } from "../axios"
 
 
@@ -19,6 +20,12 @@ export const ServerUserApi = {
         
         const res = await axios.get('/faceit/me/stats')
         return res.data 
+    },
+    getTeamDetails:async(id:string, cookie?:string)=>{
+        const axios = createServerAxios(cookie)
+
+        const res = await axios.get<TeamResponse>(`/Team/${id}`)
+        return res.data
     }
 
 

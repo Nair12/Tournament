@@ -5,190 +5,203 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 generator client {
   provider = "prisma-client-js"
-
 }
 
 datasource db {
   provider = "postgresql"
 }
 
+model Player {
+  id    String @id @default(uuid())
+  email String @unique
 
+  isActive Boolean @default(false)
 
+  password String
 
-model Player{
-   id    String @id @default(uuid())
-   email String @unique
-  
-   isActive Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-   password String 
+  teamId String?
 
-   createdAt DateTime @default(now())
-   updatedAt DateTime @updatedAt
-   
+  team Team? @relation(fields: [teamId], references: [id])
 
-   teamId String?
+  leadTeam Team? @relation("Captain")
 
-   team Team? @relation(fields: [teamId],references: [id])
-
-   leadTeam Team? @relation("Captain")
-
-   createdTorunaments Tournament[]
+  createdTorunaments Tournament[]
 
   faceitProfile FaceitProfile?
 
-   createdMatches Match[]
+  createdMatches Match[]
 
-  
+  resumes Resume?
 }
 
-model FaceitProfile{
-    id String @id @default(uuid())
-    playerId String @unique
+model FaceitProfile {
+  id       String @id @default(uuid())
+  playerId String @unique
 
-    player Player @relation(fields: [playerId],references: [id])
-    faceitId String @unique
-    nickname String
-    avatar String?
-    
-    elo Int @default(0)
-    skillLevel Int @default(0)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  player   Player  @relation(fields: [playerId], references: [id])
+  faceitId String  @unique
+  nickname String
+  avatar   String?
 
-    stats FaceitStats?
-    country String @default("UK")
+  elo        Int      @default(0)
+  skillLevel Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
+  stats   FaceitStats?
+  country String       @default("UK")
 }
 
-model FaceitStats{
-    id String @id @default(uuid())
-    faceitProfileId String @unique
-    faceitProfile FaceitProfile @relation(fields: [faceitProfileId],references: [faceitId])
-    matches Int
-    kdRatio Float
-    winRate Float
-    avg Float
-    
-    adr Float
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model FaceitStats {
+  id              String        @id @default(uuid())
+  faceitProfileId String        @unique
+  faceitProfile   FaceitProfile @relation(fields: [faceitProfileId], references: [faceitId])
+  matches         Int
+  kdRatio         Float
+  winRate         Float
+  avg             Float
 
-    segments SegmentStats[]
-    weapons WeaponStats[]
+  adr       Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
+  segments SegmentStats[]
+  weapons  WeaponStats[]
 }
 
+model SegmentStats {
+  id            String @id @default(uuid())
+  faceitStatsId String
 
-model SegmentStats{
-    id String @id @default(uuid())
-    faceitStatsId String 
+  faceitStats FaceitStats @relation(fields: [faceitStatsId], references: [id])
 
-    faceitStats FaceitStats @relation(fields: [faceitStatsId],references: [id])
+  imgSmall   String?
+  imgRegular String?
 
-    imgSmall String?
-    imgRegular String?
+  map String
 
-    map String
+  matches            Int
+  winRate            Float
+  kdRatio            Float
+  adr                Float
+  headshotPercentage Float
 
-    matches Int
-    winRate Float
-    kdRatio Float
-    adr Float
-    headshotPercentage Float
-
-
-
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
+model WeaponStats {
+  id            String @id @default(uuid())
+  faceitStatsId String
 
-model WeaponStats{
-    id String @id @default(uuid())
-    faceitStatsId String
+  faceitStats FaceitStats @relation(fields: [faceitStatsId], references: [id])
 
-    faceitStats FaceitStats @relation(fields: [faceitStatsId],references: [id])
+  weapon String
 
-    weapon String
+  kills              Int
+  accuracy           Float
+  headshotPercentage Float
 
-    kills Int
-    accuracy Float
-    headshotPercentage Float
-    
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model Team{
-   id String @id @default(uuid())
-   name String @unique
+model Team {
+  id   String @id @default(uuid())
+  name String @unique
 
-   createdAt DateTime @default(now())
-   updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    captainId String @unique
+  captainId String @unique
 
-    description String?
-    
-    captain Player @relation("Captain",fields: [captainId],references: [id])
+  description String?
 
-    avatar String // FileName
+  captain Player @relation("Captain", fields: [captainId], references: [id])
 
-    
-    players Player[]
+  avatar String // FileName
 
-   matchesAsTeamA Match[] @relation("TeamA")
-   matchesAsTeamB Match[] @relation("TeamB")
+  players Player[]
 
-   tournaments TournamentMembers[]
+  matchesAsTeamA Match[] @relation("TeamA")
+  matchesAsTeamB Match[] @relation("TeamB")
 
-
+  tournaments TournamentMembers[]
 }
 
 model Tournament {
-  id String @id @default(uuid())
+  id    String @id @default(uuid())
   title String
 
   startDate DateTime
 
   endDate DateTime
 
-  type TournamentType 
+  type TournamentType
 
   prizeFund String @default("0")
 
   creatorId String
 
-  creator Player @relation(fields: [creatorId],references: [id])
+  creator Player @relation(fields: [creatorId], references: [id])
 
   mathes Match[]
-  
+
   teams TournamentMembers[]
-
-
-  
 }
 
 model TournamentMembers {
-
-  id String @id @default(uuid())
-  teamId String
+  id           String @id @default(uuid())
+  teamId       String
   TournamentId String
 
-  Tournament Tournament @relation(fields: [TournamentId],references: [id])
-  Team Team @relation(fields: [teamId],references: [id])
+  Tournament Tournament @relation(fields: [TournamentId], references: [id])
+  Team       Team       @relation(fields: [teamId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
 
+model Resume {
+  id String @id @default(uuid())
+
+  playerId String @unique
+
+  language String
+
+  description String?
+
+  player Player @relation(fields: [playerId], references: [id])
+
+  roles Role[] @relation("ResumeToRole")
+
+  type ResumeType
+
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  actualizedAt DateTime @default(now())
 
 }
 
 
+model Role {
+  id String @id @default(uuid())
+
+  name String @unique
+
+  resumes Resume[] @relation("ResumeToRole")
+  resumeId String?
+
+}
+
 
 model Match {
-  id String @id @default(uuid())
+  id        String    @id @default(uuid())
   matchType MatchType
 
   tournamentId String?
@@ -198,42 +211,32 @@ model Match {
   teamAId String
   teamBId String
 
-   
+  tournament Tournament? @relation(fields: [tournamentId], references: [id])
 
-  tournament Tournament? @relation(fields: [tournamentId],references: [id])
-  
+  creator Player @relation(fields: [creatorId], references: [id])
 
+  teamA Team @relation("TeamA", fields: [teamAId], references: [id])
 
-  creator Player @relation(fields: [creatorId],references: [id])
+  teamB Team @relation("TeamB", fields: [teamBId], references: [id])
 
-  teamA Team @relation("TeamA",fields: [teamAId],references: [id])
-
-  teamB Team @relation("TeamB",fields: [teamBId],references: [id])
-
-
-
-
-
-
-  
-  
   startTime DateTime? // Filling if match planned in future
-
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
 }
-
 
 enum MatchType {
   Tournament
   Single
 }
+
 enum TournamentType {
-    OneByOne
-    TwoByTwo
-    FiveByFive
+  OneByOne
+  TwoByTwo
+  FiveByFive
 }
 
-
+enum ResumeType {
+  Casual
+  Professional
+}

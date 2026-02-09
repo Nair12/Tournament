@@ -1,7 +1,7 @@
 'use server';
 
 import { cookies, headers } from 'next/headers';
-import { ServerUserApi } from '@/api/Server/UserApi';
+import { ServerUserApi } from '@/app/api/Server/UserApi';
 import Sidebar from './_components/Sidebar';
 import { UserStoreContext, UserStoreProvider, useUserStore } from '../_providers/UserProvider';
 import Header from './_components/Header';
