@@ -7,9 +7,10 @@ import { TeamModule } from './modules/team.module';
 import { ToruanamentModule } from './modules/tournament.module';
 import { MatchModule } from './modules/match.module';
 import { FaceitModule } from './modules/faceit.module';
+import { ResumeModule } from './modules/resume.module';
 
 @Module({
-  imports: [PrismaModule,PlayerModule,TeamModule,ToruanamentModule,MatchModule,FaceitModule],
+  imports: [PrismaModule,PlayerModule,TeamModule,ToruanamentModule,MatchModule,FaceitModule,ResumeModule],
   controllers: [AppController],
   providers: [AppService]
 })

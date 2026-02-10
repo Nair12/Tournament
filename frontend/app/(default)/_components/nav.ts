@@ -47,9 +47,9 @@ export const getSideBarNavigation = (team?:TeamResponse)=>{
     }
     ,
     {
-        title: "Create request",
+        title: "Create resume",
         icon:PencilSquareIcon,
-        url:"/tournament/register"
+        url:"/resumes/create"
 
     },
     {

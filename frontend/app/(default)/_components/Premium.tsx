@@ -1,7 +1,10 @@
+'use client'
 import { ChevronRightIcon, SparklesIcon } from '@heroicons/react/24/solid';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const Premium = () => {
+    const router = useRouter()
     return (
         <div className="space-y-8">
           
@@ -29,7 +32,7 @@ const Premium = () => {
                     </div>
 
                   
-                    <button className="relative z-10 px-8 py-3 bg-white text-black text-[11px] font-black uppercase tracking-[0.2em] rounded-xl hover:bg-zinc-200 transition-colors flex items-center gap-2 group/btn">
+                    <button onClick={()=>{router.push('premium/plans')}}className="relative z-10 px-8 py-3 bg-white text-black text-[11px] font-black uppercase tracking-[0.2em] rounded-xl hover:bg-zinc-200 transition-colors flex items-center gap-2 group/btn">
                         Upgrade Now
                         <ChevronRightIcon className="size-4 group-hover/btn:translate-x-1 transition-transform" />
                     </button>
