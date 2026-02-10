@@ -2,36 +2,46 @@ import { ResumeRegisterRequest } from "src/DTO/Resume/ResumeRegisterRequest.dto"
 import { IResumeRepository } from "./IResume.repository";
 import { Inject } from "@nestjs/common";
 import { PrismaService } from "prisma/PrismaClient";
-import { Resume } from "@prisma/client";
+import { Resume, Role } from "@prisma/client";
 
 
 
-export class ResumeRepository extends IResumeRepository{
-    
+export class ResumeRepository extends IResumeRepository {
+
+
+
     constructor(
-       private  prisma:PrismaService
-    ){
-     super()
+        @Inject(PrismaService)
+        private prisma: PrismaService
+    ) {
+        super()
+    }
+    async getRoles(): Promise<Role[]> {
+        const roles = await this.prisma.role.findMany()
+        return roles
     }
 
 
-    async registerResume(payload: ResumeRegisterRequest,id:string):Promise<Resume> {
-         const resume = await this.prisma.resume.create({
-            data:{
-                description:payload.description,
-                language:payload.language,
-                player:{
-                    connect:{
-                        id:id
+    async registerResume(payload: ResumeRegisterRequest, id: string): Promise<Resume> {
+        const resume = await this.prisma.resume.create({
+            data: {
+                description: payload.description,
+                language: payload.language,
+                player: {
+                    connect: {
+                        id: id
                     }
                 },
                 roles: {
-                    connect: payload.roles.map(roleId =>({ id: roleId.id}))
+                    connect: payload.roles.map(roleID => ({ id: roleID }))
                 },
-                type:payload.type
+                type: payload.type
+            },
+            include: {
+                player: true
             }
-         })
-         return resume 
+        })
+        return resume
     }
     getResume(id: string) {
         throw new Error("Method not implemented.");
@@ -42,5 +52,10 @@ export class ResumeRepository extends IResumeRepository{
     actualizeResume(id: string) {
         throw new Error("Method not implemented.");
     }
-    
+
+    async getResumes(): Promise<Resume[]> {
+       return await this.prisma.resume.findMany({include:{player:{include:{faceitProfile:true}}}})
+
+    }
+
 }

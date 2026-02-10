@@ -5,7 +5,8 @@ import { IPlayerRepository } from "src/Repository/IPlayer.repository";
 import { ITeamRepository } from "src/Repository/ITeam.repository";
 import { isValidDate } from "rxjs/internal/util/isDate";
 import { Player, Team } from "@prisma/client";
-import { PlayerResponse } from "src/DTO/PlayerResponse.dto";
+import { PlayerResponse } from "src/DTO/Player/PlayerResponse.dto";
+
 
 
 @Injectable()

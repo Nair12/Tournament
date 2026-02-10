@@ -1,6 +1,7 @@
 import { Player, Team } from "@prisma/client";
 import { ValidationResult } from "./ValidationResult";
-import { PlayerResponse } from "src/DTO/PlayerResponse.dto";
+import { PlayerResponse } from "src/DTO/Player/PlayerResponse.dto";
+
 
 
 

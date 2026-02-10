@@ -1,5 +1,5 @@
 import { Player, Prisma } from "@prisma/client";
-import { PlayerResponse } from "src/DTO/PlayerResponse.dto";
+import { PlayerResponse } from "src/DTO/Player/PlayerResponse.dto";
 import { PlayerRepository } from "src/Repository/Player.repository";
 
 

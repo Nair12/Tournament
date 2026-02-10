@@ -1,5 +1,4 @@
-import { PlayerAddRequest } from "src/DTO/PlayerAddRequset.dto";
-import { PlayerResponse } from "src/DTO/PlayerResponse.dto";
+import { PlayerAddRequest } from "src/DTO/Player/PlayerAddRequset.dto";
 import { IPlayerRepository } from "./IPlayer.repository";
 import { PrismaService } from "prisma/PrismaClient";
 import { FaceitProfile, Player, Prisma } from "@prisma/client";

@@ -1,8 +1,8 @@
 import { Exclude,Expose, Type } from "class-transformer";
 import { IsString } from "class-validator";
-import { TeamResponse } from "./TeamReponse.dto";
-import { FaceitUserRequstDto } from "./Faceit/FaceitUserRequest.dto";
-import { FaceitUserResponse } from "./Faceit/FaceitUserResponse.dto";
+import { FaceitUserResponse } from "../Faceit/FaceitUserResponse.dto";
+import { TeamResponse } from "../TeamReponse.dto";
+
 
 
 
