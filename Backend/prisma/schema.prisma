@@ -195,7 +195,6 @@ model Role {
   name String @unique
 
   resumes Resume[] @relation("ResumeToRole")
-  resumeId String?
 
 }
 

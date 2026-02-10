@@ -21,6 +21,9 @@ import type {
   PlayerAddRequest,
   PlayerControllerGetById200,
   PlayerControllerGetUserData200,
+  ResumeRegisterRequest,
+  ResumeResponse,
+  RoleDto,
   TeamControllerDeleteTeam200,
   TeamControllerGetTeamByNameParams,
   TeamCreateRequest,
@@ -206,7 +209,24 @@ const matchControllerRegisterMatch = <TData = AxiosResponse<void>>(
     );
   }
 
-return {appControllerGetHello,appControllerGetBye,playerControllerFaceitLogin,playerControllerGetUserData,playerControllerGetById,playerControllerRegister,playerControllerLogin,faceitControllerGetStats,faceitControllerGetStatsById,faceitControllerFaceitLogin,faceitControllerLoginCallback,teamControllerGetTeamByName,teamControllerRegisterTeam,teamControllerGetTeam,teamControllerDeleteTeam,tournamentControllerGetTournament,tournamentControllerAddTournament,matchControllerGetMatch,matchControllerDeleteMatch,matchControllerRegisterMatch}};
+const resumeControllerRegisterResume = <TData = AxiosResponse<ResumeResponse>>(
+    resumeRegisterRequest: ResumeRegisterRequest, options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.post(
+      `/resume`,
+      resumeRegisterRequest,options
+    );
+  }
+
+const resumeControllerGetRoles = <TData = AxiosResponse<RoleDto[]>>(
+     options?: AxiosRequestConfig
+ ): Promise<TData> => {
+    return axios.get(
+      `/resume/roles`,options
+    );
+  }
+
+return {appControllerGetHello,appControllerGetBye,playerControllerFaceitLogin,playerControllerGetUserData,playerControllerGetById,playerControllerRegister,playerControllerLogin,faceitControllerGetStats,faceitControllerGetStatsById,faceitControllerFaceitLogin,faceitControllerLoginCallback,teamControllerGetTeamByName,teamControllerRegisterTeam,teamControllerGetTeam,teamControllerDeleteTeam,tournamentControllerGetTournament,tournamentControllerAddTournament,matchControllerGetMatch,matchControllerDeleteMatch,matchControllerRegisterMatch,resumeControllerRegisterResume,resumeControllerGetRoles}};
 export type AppControllerGetHelloResult = AxiosResponse<string>
 export type AppControllerGetByeResult = AxiosResponse<string>
 export type PlayerControllerFaceitLoginResult = AxiosResponse<void>
@@ -227,3 +247,5 @@ export type TournamentControllerAddTournamentResult = AxiosResponse<void>
 export type MatchControllerGetMatchResult = AxiosResponse<MatchControllerGetMatch200>
 export type MatchControllerDeleteMatchResult = AxiosResponse<MatchResponse>
 export type MatchControllerRegisterMatchResult = AxiosResponse<void>
+export type ResumeControllerRegisterResumeResult = AxiosResponse<ResumeResponse>
+export type ResumeControllerGetRolesResult = AxiosResponse<RoleDto[]>

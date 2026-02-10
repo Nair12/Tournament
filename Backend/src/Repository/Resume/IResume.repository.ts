@@ -1,5 +1,6 @@
-import { Resume } from "@prisma/client";
+import { Resume, Role } from "@prisma/client";
 import { ResumeRegisterRequest } from "src/DTO/Resume/ResumeRegisterRequest.dto";
+import { ResumeResponse } from "src/DTO/Resume/ResumeResponse.dto";
 
 
 
@@ -7,6 +8,10 @@ import { ResumeRegisterRequest } from "src/DTO/Resume/ResumeRegisterRequest.dto"
 export abstract class IResumeRepository {
     
     abstract registerResume(payload: ResumeRegisterRequest,id:string):Promise<Resume>
+
+    abstract getResumes():Promise<Resume[]>
+    
+    abstract getRoles():Promise<Role[]>
 
     abstract getResume(id: string)
 

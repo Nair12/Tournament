@@ -32,7 +32,7 @@ export const getSideBarNavigation = (team?:TeamResponse)=>{
     {
       title:"Find Player",
       icon: UserIcon,
-      url:"/players"
+      url:"/resumes"
     },
    !!team?
     {

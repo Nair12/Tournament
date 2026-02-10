@@ -2,7 +2,8 @@ import { Inject, Injectable } from "@nestjs/common";
 import { Player, Prisma } from "@prisma/client";
 import { IPlayerService } from "src/Services/IPlayer.service";
 import { IPlayerFassade } from "./IPlayerFassade";
-import { PlayerResponse } from "src/DTO/PlayerResponse.dto";
+import { PlayerResponse } from "src/DTO/Player/PlayerResponse.dto";
+
 
 @Injectable()
 export class PlayerFassade extends IPlayerFassade {

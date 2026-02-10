@@ -2,8 +2,7 @@ import { BadRequestException, Body, Controller, Get, HttpCode, Inject, NotFoundE
 import * as express from 'express';
 import { ok } from "assert";
 import { LoginRequest } from "src/DTO/LoginRequest.dto";
-import { PlayerAddRequest } from "src/DTO/PlayerAddRequset.dto";
-import { PlayerResponse } from "src/DTO/PlayerResponse.dto";
+import { PlayerAddRequest } from "src/DTO/Player/PlayerAddRequset.dto";
 import { JwtAuthGuard } from "src/Guard/jwt.auth.guard";
 import { IPlayerService } from "src/Services/IPlayer.service";
 import { FileInterceptor } from "@nestjs/platform-express";
@@ -11,6 +10,7 @@ import { randomUUID } from "crypto";
 import { diskStorage } from "multer";
 import { extname } from "path";
 import { AuthGuard } from "@nestjs/passport";
+import { PlayerResponse } from "src/DTO/Player/PlayerResponse.dto";
 
 
 @Controller("Player")
