@@ -9,7 +9,7 @@ const ResumesList = async () => {
      
    const cookieHeader = (await headers()).get('cookie') || '';
    const resumes = await ServerUserApi.getResumes(cookieHeader)
-   console.log("Resumes:" + resumes)
+   console.log(resumes)
 
     return (
         <div>

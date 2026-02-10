@@ -14,7 +14,6 @@ export class ResumeController{
 
     @UseGuards(JwtAuthGuard)
     @Get()
-    @HttpCode(HttpStatus.NO_CONTENT)
     async getResumes()
     {
         console.log("Resumes started")
