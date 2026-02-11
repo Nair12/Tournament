@@ -3,10 +3,12 @@ import { UserGroupIcon, PlusIcon,MagnifyingGlassIcon,DocumentTextIcon } from '@h
 import { useUserStore } from '@/app/_providers/UserProvider';
 import { Link } from 'lucide-react';
 import { DocumentIcon } from '@heroicons/react/24/solid';
+import { useRouter } from 'next/navigation';
 
 const TeamWidget = () => {
 
     const team = useUserStore((u) => u.user?.team);
+    const router = useRouter()
 
     return (
         <div
@@ -29,7 +31,7 @@ const TeamWidget = () => {
             {/* CONTENT */}
             {team ? (
                 
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-6" onClick={()=> router.push(`/team/browse/${team.id}`)}>
                     {/* Avatar */}
                     <div className="relative">
                         <img

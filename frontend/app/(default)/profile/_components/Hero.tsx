@@ -91,12 +91,7 @@ export default function FuturisticProfile() {
                                     </div>
                                 </div>
 
-                                <div className="flex flex-wrap gap-3">
-                                    <span className="bg-zinc-800/50 border border-zinc-700 px-3 py-1 text-[11px] uppercase">
-                                        Rank: Elite
-                                    </span>
-
-                                </div>
+                             
                             </div>
                         </div>
 
@@ -144,7 +139,7 @@ export default function FuturisticProfile() {
                             <div className="grid grid-cols-2 gap-2 text-[10px]">
                                 <div className="bg-zinc-900/50 p-2 border border-zinc-800/50">
                                     <p className="text-zinc-500 uppercase">Members</p>
-                                    <p className="font-bold">5 / 5</p>
+                                    <p className="font-bold">{player?.team?.players?.length}</p>
                                 </div>
                                 <div className="bg-zinc-900/50 p-2 border border-zinc-800/50 text-right">
                                     <p className="text-zinc-500 uppercase">Status</p>

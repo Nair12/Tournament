@@ -1,12 +1,14 @@
 import { ResumeResponse, RoleDto } from "@/models/generated.schemas";
 
 const ResumeGrid = ({ resumes }: { resumes: ResumeResponse[] }) => {
+
+    const newResumes = [...resumes,...resumes,...resumes,...resumes,...resumes,...resumes,...resumes,...resumes,...resumes,...resumes]
     return (
    
         <div className="w-full">
        
-            <div className="grid grid-cols-1 gap-4">
-                {resumes.map((resume, idx) => (
+            <div className="grid grid-cols-1 gap-6">
+                {newResumes.map((resume, idx) => (
                     <div
                         key={idx}
                      
@@ -25,9 +27,9 @@ const ResumeGrid = ({ resumes }: { resumes: ResumeResponse[] }) => {
                                 />
                             </div>
 
-                            {/* CONTENT */}
+                          
                             <div className="flex flex-col flex-1 min-w-0">
-                                {/* HEADER */}
+                          
                                 <div className="flex items-center">
                                     <div className="truncate">
                                         <div className="text-lg font-black uppercase italic truncate">
