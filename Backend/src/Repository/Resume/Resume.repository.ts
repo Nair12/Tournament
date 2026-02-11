@@ -54,7 +54,7 @@ export class ResumeRepository extends IResumeRepository {
     }
 
     async getResumes(): Promise<Resume[]> {
-       return await this.prisma.resume.findMany({include:{player:{include:{faceitProfile:true}}}})
+       return await this.prisma.resume.findMany({include:{player:{include:{faceitProfile:true}}, roles:true}})
 
     }
 
