@@ -63,6 +63,7 @@ export interface TeamResponse {
   name: TeamResponseName;
   players: PlayerResponse[];
   captain: PlayerResponse;
+  canEdit: boolean;
   avatar: string;
 }
 
@@ -184,15 +185,6 @@ export interface TournamentResponse {
   teams: TournamentMembersRes[];
 }
 
-export type ResumeRegisterRequestType = { [key: string]: unknown };
-
-export interface ResumeRegisterRequest {
-  description: string;
-  type: ResumeRegisterRequestType;
-  language: string;
-  roles: string[];
-}
-
 export interface RoleDto {
   id: string;
   name: string;
@@ -206,6 +198,15 @@ export interface ResumeResponse {
   language: string;
   roles: RoleDto[];
   player: PlayerResponse;
+}
+
+export type ResumeRegisterRequestType = { [key: string]: unknown };
+
+export interface ResumeRegisterRequest {
+  description: string;
+  type: ResumeRegisterRequestType;
+  language: string;
+  roles: string[];
 }
 
 export type PlayerControllerGetUserData200 = { [key: string]: unknown };

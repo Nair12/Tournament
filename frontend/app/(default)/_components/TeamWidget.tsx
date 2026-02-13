@@ -37,10 +37,7 @@ const TeamWidget = () => {
                         <img
                             src={`${process.env.NEXT_PUBLIC_API_URL }/Uploads/teams/${team.avatar}`}
                             alt={String(team.name)}
-                            className="
-                w-20 h-20 rounded-xl object-cover
-                border border-white/10
-                shadow-[0_0_20px_rgba(255,255,255,0.05)]
+                            className=" w-20 h-20 rounded-xl object-cover border border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.05)]
               "
                         />
                         <div className="absolute inset-0 rounded-xl ring-1 ring-white/10" />

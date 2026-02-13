@@ -29,9 +29,15 @@ export class TeamController{
 
     
     @Get(":id")
-    async getTeam(@Param('id')id:string){
+    @UseGuards(JwtAuthGuard)
+    async getTeam(@Param('id')id:string,@Req() req){
+        
+        const userId = req.user['userId']
+
+        
+        
      
-        const team = await this.service.getTeam(id)
+        const team = await this.service.getTeam(id,userId)
         if(!team){
             throw new NotFoundException()
         }

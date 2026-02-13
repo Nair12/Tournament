@@ -21,15 +21,16 @@ export class TeamService extends ITeamService {
     super()
   }
 
-  async getTeam(id: string): Promise<TeamResponse | null> {
-    const team = await this.repository.getTeam(id)
+  async getTeam(teamId: string,requestId:string): Promise<TeamResponse | null> {
+    const team = await this.repository.getTeam(teamId)
 
     if (!team) {
       return null
     }
      console.log("Team before mapping: " +  JSON.stringify(team))
     return plainToInstance(
-      TeamResponse,team, { excludeExtraneousValues: true },
+      TeamResponse,{...team, canEdit:this.validator.canEdit(team,requestId).isValid}, { excludeExtraneousValues: true },
+      
     )
   }
 
