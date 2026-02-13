@@ -13,7 +13,7 @@ export abstract class ITeamValidator {
 
     abstract canJoinTeam(team:Team,player:Player):ValidationResult
 
-    abstract isCaptain(team:Team,player:Player):ValidationResult
+    abstract canEdit(team:Team,requestId:string):ValidationResult
 
 
     

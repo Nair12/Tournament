@@ -50,7 +50,7 @@ export class TeamValidador extends ITeamValidator {
 
     canDeleteTeam(team: Team, player: Player): ValidationResult {
 
-        if (!this.isCaptain(team, player).isValid) {
+        if (!this.canEdit(team, player.id).isValid) {
             return {
                 isValid: false,
                 message: "Only captain can delete the team"
@@ -62,8 +62,8 @@ export class TeamValidador extends ITeamValidator {
 
     }
 
-    isCaptain(team: Team, player: Player): ValidationResult {
-        if (team.captainId == player.id) {
+    canEdit(team: Team, requestId:string): ValidationResult {
+        if (team.captainId == requestId) {
             return {
                 isValid: true,
             }

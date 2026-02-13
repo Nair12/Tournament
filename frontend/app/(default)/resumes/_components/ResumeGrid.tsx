@@ -1,14 +1,15 @@
 import { ResumeResponse, RoleDto } from "@/models/generated.schemas";
+import { mockResumes } from "./mockResume";
 
 const ResumeGrid = ({ resumes }: { resumes: ResumeResponse[] }) => {
 
-    const newResumes = [...resumes,...resumes,...resumes,...resumes,...resumes,...resumes,...resumes,...resumes,...resumes,...resumes]
+    
     return (
    
         <div className="w-full">
        
             <div className="grid grid-cols-1 gap-6">
-                {newResumes.map((resume, idx) => (
+                {mockResumes.map((resume, idx) => (
                     <div
                         key={idx}
                      
@@ -52,7 +53,7 @@ const ResumeGrid = ({ resumes }: { resumes: ResumeResponse[] }) => {
                               
                                 <div className="mt-auto flex items-center justify-start">
                                     <div className="flex gap-2 flex-wrap">
-                                        {resume.roles?.slice(0, 3).map((role: RoleDto, rIdx: number) => (
+                                        {resume.roles?.slice(0, 3).map((role, rIdx: number) => (
                                             <span
                                                 key={rIdx}
                                                 className="px-2 py-0.5 bg-zinc-100 text-black text-[9px] font-black uppercase w-[50px] h-[20px] text-center"
