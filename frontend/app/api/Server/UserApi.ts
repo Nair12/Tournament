@@ -27,9 +27,13 @@ export const ServerUserApi = {
         const res = await axios.get<TeamResponse>(`/Team/${id}`)
         return res.data
     },
-    getResumes: async (cookie:string)=>{
+    getResumes: async (cookie:string,params: Record<string,string>|undefined)=>{
+        console.log("api started")
+        console.log(params)
         const axios = createServerAxios(cookie)
-        const res = await axios.get<ResumeResponse[]>("/resume")
+        const res = await axios.get<ResumeResponse[]>(`/resume`,{
+            params:params
+        })
         return res.data 
     }
 

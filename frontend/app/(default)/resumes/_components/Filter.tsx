@@ -5,6 +5,7 @@ import { languages } from '../create/_components/languages';
 import { Slider } from '@/components/ui/slider';
 import RolesSelect from './RolesSelect';
 import { useRoles } from '@/hooks/useRoles';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 
 const Filter = () => {
@@ -15,13 +16,19 @@ const Filter = () => {
     const [language,setLanguage] = useState<string>("en")
     const [selectedRoles,setRoles] = useState<string[]>([])
 
+
+    const searhParams = useSearchParams()
+    const router = useRouter()
+
     const {data:roles,isLoading,isError} = useRoles()
 
-
     const handleUpdateFilter = ()=>{
-        console.log(levelRange)
-        console.log(type)
-        console.log(language)
+        const params = new URLSearchParams(searhParams)
+        params.set("levelRange",`${levelRange[0]}/${levelRange[1]}`)
+        params.set("type",type)
+        params.set("language",language)
+        params.set("roles",selectedRoles.join('/'))
+        router.push(`?${params.toString()}`)
 
     }
 

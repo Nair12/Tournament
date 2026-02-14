@@ -7,9 +7,14 @@ import { languages } from './create/_components/languages';
 import { Slider } from '@/components/ui/slider';
 import Filter from './_components/Filter';
 
-const ResumesList = async () => {
+const ResumesList = async ({searchParams}: {searchParams: any} ) => {
+
+  
     const cookieHeader = (await headers()).get('cookie') || '';
-    const resumes = await ServerUserApi.getResumes(cookieHeader);
+    
+    const solvedParams = await searchParams
+    
+    const resumes = await ServerUserApi.getResumes(cookieHeader,solvedParams);
 
     if (!resumes || resumes.length === 0) {
         return (

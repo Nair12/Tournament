@@ -20,6 +20,9 @@ export class TeamResponse
    @Expose()
    @Type(()=>PlayerResponse)
    captain: PlayerResponse
+
+   @Expose()
+   description:string
    
    @Expose()
    canEdit:boolean

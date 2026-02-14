@@ -63,6 +63,7 @@ export interface TeamResponse {
   name: TeamResponseName;
   players: PlayerResponse[];
   captain: PlayerResponse;
+  description: string;
   canEdit: boolean;
   avatar: string;
 }
