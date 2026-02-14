@@ -1,4 +1,5 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Post, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, HttpStatus, Inject, Post, Query, Req, UseGuards } from "@nestjs/common";
+import { ResumeFiltedDto } from "src/DTO/Resume/ResumeFilter.dto";
 import { ResumeRegisterRequest } from "src/DTO/Resume/ResumeRegisterRequest.dto";
 import { JwtAuthGuard } from "src/Guard/jwt.auth.guard";
 import { IResumeService } from "src/Services/Resume/IResume.service";
@@ -14,9 +15,9 @@ export class ResumeController{
 
     @UseGuards(JwtAuthGuard)
     @Get()
-    async getResumes()
+    async getResumes(@Query() params:ResumeFiltedDto)
     {
-        console.log("Resumes started")
+        console.log(params)
         const resumes = await this.serivce.getResumes()
         if(!resumes.length || resumes.length == 0) return
         

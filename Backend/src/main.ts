@@ -6,9 +6,10 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
+import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
 
 async function bootstrap() {
-    const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
 
   const config = new DocumentBuilder()
@@ -30,6 +31,13 @@ async function bootstrap() {
   app.useStaticAssets('/app/Uploads', {
     prefix: '/Uploads',
   });
+
+  app.useGlobalPipes(new ValidationPipe({
+    transform: true, 
+    transformOptions: {
+      enableImplicitConversion: true,
+    },
+  }));
 
 
   app.use(
