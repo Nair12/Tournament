@@ -7,12 +7,14 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger,DropdownMenu } from '@/components/ui/dropdown-menu';
 import TeamDropdown from '../../_components/dropdown';
+import Link from 'next/link';
 
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params;
     const cookieHeader = (await headers()).get('cookie') || '';
     const team = await ServerUserApi.getTeamDetails(id, cookieHeader);
+   
 
     console.log(team)
 
@@ -69,7 +71,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
                 <div className="lg:col-span-8 space-y-6">
                     {team.canEdit ?
                         <div>
-                            <Button type='button' className='bg-zinc-700 border  hover:bg-zinc-300 text-lg '>Open vacancy</Button>
+                            <Link type='button' className='bg-zinc-700 border  hover:bg-zinc-300 text-lg ' href='/vacancy/create'>Open vacancy</Link>
 
 
                         </div>

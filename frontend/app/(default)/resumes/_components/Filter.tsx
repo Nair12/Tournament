@@ -10,9 +10,9 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 const Filter = () => {
 
-    const levels = [1, 2,3, 4, 5, 6, 7, 8, 9, 10]
+    const levels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const [levelRange, setLevelRange] = useState([1, 10])
-    const [type,setType]= useState<string>("Professional")
+    const [type,setType]= useState<string>("All")
     const [language,setLanguage] = useState<string>("en")
     const [selectedRoles,setRoles] = useState<string[]>([])
 
@@ -36,18 +36,21 @@ const Filter = () => {
 
     return (
         <aside className="w-full md:w-[30%] sticky top-0 self-start min-w-0">
-            <div className="bg-[#111] border border-zinc-800 p-8 rounded-[2.5rem] shadow-2xl">
+            <div className="border border-zinc-800 p-8 rounded-[2.5rem] shadow-2xl">
                 <h1 className="text-5xl font-black italic text-white uppercase tracking-tighter mb-8 leading-none">
                     Filters
                 </h1>
-                <div className="h-[400px] bg-black/40 border border-white/5 rounded-2xl shadow-inner flex flex-col gap-6">
+                <div className="h-[400px] shadow-inner flex flex-col gap-6">
+               
                     <Select value={type} onValueChange={(val)=>setType(val)}>
+                        <span className='font-black italic text-white uppercase tracking-tighter leading-none text-center'>Resume type</span>
                         <SelectTrigger className='w-[180px]'>
                             <SelectValue placeholder="Select Type.." />
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
                                 <SelectLabel>Resume type</SelectLabel>
+                                <SelectItem value='All'>All</SelectItem>
                                 <SelectItem value='Casual'>Casual</SelectItem>
                                 <SelectItem value='Professional'>Professional</SelectItem>
                             </SelectGroup>
