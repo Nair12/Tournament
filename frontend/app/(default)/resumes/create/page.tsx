@@ -68,11 +68,13 @@ const RegisterResumePage = () => {
   }
 
   const toggleRole = (roleId: string) => {
+    
     const currentRoles = form.getValues("roles")
     const newRoles = currentRoles.includes(roleId)
       ? currentRoles.filter((r) => r !== roleId)
       : [...currentRoles, roleId]
     form.setValue("roles", newRoles, { shouldValidate: true })
+
   }
   const {data:roles,isLoading,isError} = useRoles()
   
@@ -180,11 +182,8 @@ const RegisterResumePage = () => {
                         {languages.map((item, idx) => {
                           return (
 
-                            <SelectItem value={item.code} id={String(idx)}>
-
+                            <SelectItem value={item.code} key={item.code} id={String(idx)}>
                               {item.name}
-
-
                             </SelectItem>
 
                           )

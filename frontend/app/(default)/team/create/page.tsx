@@ -53,6 +53,7 @@ const Page = () => {
 
 
     }
+    
 
     return (
         <div className="flex items-center justify-center min-h-[80vh] p-6 animate-fadeUp">
