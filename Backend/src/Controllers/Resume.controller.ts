@@ -18,7 +18,7 @@ export class ResumeController{
     async getResumes(@Query() params:ResumeFiltedDto)
     {
         console.log(params)
-        const resumes = await this.serivce.getResumes()
+        const resumes = await this.serivce.getResumes(params)
         if(!resumes.length || resumes.length == 0) return
         
         console.log(resumes)
