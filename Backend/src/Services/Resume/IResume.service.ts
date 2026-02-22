@@ -1,6 +1,7 @@
 import { ResumeRegisterRequest } from "src/DTO/Resume/ResumeRegisterRequest.dto";
 import { RoleDto } from "../../DTO/Resume/Role.dto";
 import { ResumeResponse } from "src/DTO/Resume/ResumeResponse.dto";
+import { ResumeFiltedDto } from "src/DTO/Resume/ResumeFilter.dto";
 
 
 export abstract class IResumeService {
@@ -15,7 +16,7 @@ export abstract class IResumeService {
 
     abstract getRoles():Promise<RoleDto[]>
 
-    abstract getResumes():Promise<ResumeResponse[]>
+    abstract getResumes(filters:ResumeFiltedDto):Promise<ResumeResponse[]>
     
 
 

@@ -16,13 +16,7 @@ const ResumesList = async ({searchParams}: {searchParams: any} ) => {
     
     const resumes = await ServerUserApi.getResumes(cookieHeader,solvedParams);
 
-    if (!resumes || resumes.length === 0) {
-        return (
-            <div className="text-zinc-500 italic text-left p-10 uppercase tracking-[0.3em]">
-                No_Data_Detected
-            </div>
-        );
-    }
+   
 
     console.log(resumes)
 

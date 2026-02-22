@@ -1,7 +1,18 @@
 import { ResumeResponse, RoleDto } from "@/models/generated.schemas";
 import { mockResumes } from "./mockResume";
+import { FaceFrownIcon } from "@heroicons/react/24/solid";
 
 const ResumeGrid = ({ resumes }: { resumes: ResumeResponse[] }) => {
+
+     if (!resumes || resumes.length === 0) {
+        return (
+            <div className=" flex flex-col items-center justify-center">
+               <span className="text-zinc-500 italic text-left p-10 uppercase tracking-[0.3em]">
+                No_Resumes_Detected</span> 
+               <FaceFrownIcon className="h-14 w-14"/>
+            </div>
+        );
+    }
 
     
     return (
@@ -9,7 +20,7 @@ const ResumeGrid = ({ resumes }: { resumes: ResumeResponse[] }) => {
         <div className="w-full">
        
             <div className="grid grid-cols-1 gap-6">
-                {mockResumes.map((resume, idx) => (
+                {resumes.map((resume, idx) => (
                     <div
                         key={idx}
                      

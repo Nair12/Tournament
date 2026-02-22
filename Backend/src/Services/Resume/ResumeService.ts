@@ -6,6 +6,7 @@ import { IResumeRepository } from "src/Repository/Resume/IResume.repository";
 import { plainToInstance } from "class-transformer";
 import { ResumeResponse } from "src/DTO/Resume/ResumeResponse.dto";
 import { ApiNoContentResponse } from "@nestjs/swagger";
+import { ResumeFiltedDto } from "src/DTO/Resume/ResumeFilter.dto";
 
 
 export class ResumeService extends IResumeService {
@@ -23,8 +24,8 @@ export class ResumeService extends IResumeService {
         return plainToInstance(RoleDto, roles, { excludeExtraneousValues: true })
     }
 
-    async getResumes(): Promise<ResumeResponse[]> {
-       const resumes =  await this.repository.getResumes()
+    async getResumes(payload:ResumeFiltedDto): Promise<ResumeResponse[]> {
+       const resumes =  await this.repository.getResumes(payload)
        return plainToInstance(ResumeResponse,resumes,{excludeExtraneousValues:true})
     }
 
