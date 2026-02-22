@@ -75,7 +75,8 @@ export class ResumeRepository extends IResumeRepository {
             maxLevel: filters.levelRange ? Number(filters.levelRange[1]) : undefined,
             type: filters.type == "Casual" ? "Casual"
                 : filters.type == "Professional" ? "Professional" : undefined,
-            language: filters.language
+            language: filters.language,
+            roles: filters.roles ?? undefined
         }
 
         return await this.prisma.resume.findMany({
@@ -92,8 +93,10 @@ export class ResumeRepository extends IResumeRepository {
                     faceitProfile: {
                         skillLevel: { gte: conditionals.minLevel, lte: conditionals.maxLevel },
                     }
+                    
                 },
-                type:conditionals.type as ResumeType,              
+                type : conditionals.type as ResumeType, 
+                roles : filters.roles?.length == 0? {some:{id: {in:filters.roles}}}  : undefined,
             }
         })
     }
